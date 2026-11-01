@@ -1,0 +1,1936 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compliance Route 101</title>
+  <meta name="description" content="Compliance Route 101 — a map-based, gamified eLearning course on everyday workplace compliance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap">
+  <!-- Critical fallback styles: keep icons small and readable even if the design file is missing -->
+  <style>.ic{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;vertical-align:-.2em}symbol{overflow:visible}</style>
+  <style>
+/* ══════════════════════════════════════════════════════════════
+   Compliance Route 101 — corporate cartography theme
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --ink: #0d1b2e;
+  --ink-2: #44546a;
+  --muted: #6b7a90;
+  --line: #d9e0ea;
+  --navy: #0b2545;
+  --navy-2: #13315c;
+  --teal: #0e7c86;
+  --teal-2: #14a3a8;
+  --teal-soft: #dff3f3;
+  --gold: #e9a23b;
+  --gold-soft: #fdf1dc;
+  --red: #c8443a;
+  --red-soft: #fbe6e3;
+  --green: #1f8a5b;
+  --green-soft: #e0f3ea;
+  --map-bg: #e9eef3;
+  --map-land: #dfe8df;
+  --map-land-2: #e4e0d4;
+  --map-water: #cfe2ee;
+  --map-grid: rgba(11, 37, 69, .06);
+  --road: #b9c4d2;
+  --shadow: 0 10px 30px -12px rgba(11, 37, 69, .25);
+  --shadow-sm: 0 2px 8px -2px rgba(11, 37, 69, .15);
+  --radius: 16px;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --display: "Space Grotesk", var(--font);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1220; --surface: #111c2e; --surface-2: #17243a; --ink: #e8eef7; --ink-2: #b4c1d4;
+    --muted: #8496ad; --line: #24344d; --teal-soft: #0f3338; --gold-soft: #3a2c13; --red-soft: #3d1c1a;
+    --green-soft: #12301f; --map-bg: #0f1a2b; --map-land: #13261f; --map-land-2: #221f17; --map-water: #10283a;
+    --map-grid: rgba(180, 200, 230, .05); --road: #2c3d57; --shadow: 0 10px 30px -12px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1220; --surface: #111c2e; --surface-2: #17243a; --ink: #e8eef7; --ink-2: #b4c1d4;
+  --muted: #8496ad; --line: #24344d; --teal-soft: #0f3338; --gold-soft: #3a2c13; --red-soft: #3d1c1a;
+  --green-soft: #12301f; --map-bg: #0f1a2b; --map-land: #13261f; --map-land-2: #221f17; --map-water: #10283a;
+  --map-grid: rgba(180, 200, 230, .05); --road: #2c3d57; --shadow: 0 10px 30px -12px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; font-size: 16px; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--ink);
+  line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh;
+}
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0 0 .4em; letter-spacing: -.01em; }
+p { margin: 0 0 1em; }
+button { font: inherit; cursor: pointer; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+.accent { color: var(--teal-2); }
+.ic { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; vertical-align: -.2em; }
+symbol { overflow: visible; }
+
+/* ─────────── top bar ─────────── */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-block: 12px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); background: var(--navy); color: #fff; box-shadow: 0 2px 0 var(--teal);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--teal), var(--teal-2)); }
+.brand-mark .ic { width: 22px; height: 22px; }
+.brand-title { font-family: var(--display); font-weight: 700; font-size: 1.1rem; letter-spacing: .01em; }
+.brand-title span { color: var(--gold); }
+.brand-sub { font-size: .75rem; opacity: .7; }
+.hud { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.hud-item { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.08); font-size: .85rem; white-space: nowrap; }
+.hud-item .ic { color: var(--gold); }
+.hud-item small { opacity: .65; }
+.hud-item.bump { animation: bump .5s ease; }
+@keyframes bump { 40% { transform: scale(1.15); background: rgba(233,162,59,.35); } }
+.hud-progress { display: flex; align-items: center; gap: 8px; font-size: .8rem; }
+.hud-progress .bar { width: 110px; height: 8px; border-radius: 99px; background: rgba(255,255,255,.15); overflow: hidden; }
+.hud-progress .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal-2), var(--gold)); transition: width .8s cubic-bezier(.2,.8,.2,1); }
+.icon-btn { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; border: 0; background: rgba(255,255,255,.08); color: #fff; }
+.icon-btn:hover { background: rgba(255,255,255,.16); }
+
+/* ─────────── buttons ─────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 12px; border: 1px solid transparent;
+  font-weight: 600; font-size: .95rem; transition: transform .15s, box-shadow .15s, background .15s, opacity .15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--teal); color: #fff; box-shadow: 0 6px 16px -6px rgba(14,124,134,.7); }
+.btn-primary:hover { background: #0b6d76; }
+.btn-primary:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-ghost { background: var(--surface); border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+.btn-sm { padding: 8px 12px; font-size: .85rem; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ─────────── map view ─────────── */
+.view { max-width: 1280px; margin: 0 auto; padding-block: 28px 48px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 31; background: var(--navy); }
+.map-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 18px; }
+.map-head h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--ink); }
+.lead { color: var(--ink-2); max-width: 60ch; font-size: 1.05rem; }
+.eyebrow { display: inline-flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--teal); margin: 0 0 8px; }
+.map-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.name-card { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 18px; padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--teal); box-shadow: var(--shadow); }
+.name-card.nudge { animation: bump .6s ease; }
+.name-ic { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: var(--teal-soft); color: var(--teal); flex: none; }
+.name-ic .ic { width: 24px; height: 24px; }
+.name-fields { flex: 1; min-width: 0; display: grid; gap: 10px; }
+.name-fields label { color: var(--ink-2); }
+.name-fields label b { color: var(--ink); }
+.name-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.name-row input { flex: 1 1 220px; font-size: 16px; }
+.name-err { margin: 0; color: var(--red); font-size: .9rem; font-weight: 600; }
+.map-wrap { border-radius: 22px; overflow: hidden; background: var(--map-bg); border: 1px solid var(--line); box-shadow: var(--shadow); position: relative; }
+#routeMap { display: block; width: 100%; height: auto; }
+.map-bg { fill: var(--map-bg); }
+.grid-line { fill: none; stroke: var(--map-grid); stroke-width: 1; }
+.land.l1 { fill: var(--map-land); }
+.land.l2 { fill: var(--map-land-2); }
+.water { fill: var(--map-water); }
+.water.w2 { opacity: .6; }
+.contours circle { fill: none; stroke: var(--road); stroke-width: 1; stroke-dasharray: 3 5; opacity: .7; }
+.blocks rect { fill: var(--road); opacity: .45; }
+.compass-rose circle { fill: var(--surface); stroke: var(--line); }
+.compass-rose path { fill: var(--road); }
+.compass-rose path.n { fill: var(--red); }
+.compass-rose text { font: 700 12px var(--display); fill: var(--ink-2); }
+.g1 { stop-color: #14a3a8; } .g2 { stop-color: #e9a23b; }
+.road-base { fill: none; stroke: var(--road); stroke-width: 22; stroke-linecap: round; }
+.road-dash { fill: none; stroke: var(--surface); stroke-width: 2.5; stroke-dasharray: 10 12; stroke-linecap: round; opacity: .9; }
+.road-done { fill: none; stroke: url(#routeGrad); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1.6s cubic-bezier(.4,.1,.2,1); }
+
+.node { cursor: pointer; }
+.node .pulse { fill: var(--teal-2); opacity: 0; }
+.node.current .pulse { animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { r: 30; opacity: .45; } 100% { r: 54; opacity: 0; } }
+.node .disc { fill: var(--surface); stroke: var(--line); stroke-width: 3; transition: all .3s; }
+.node .ic-node { color: var(--muted); }
+.node.unlocked .disc, .node.current .disc { stroke: var(--teal); }
+.node.unlocked .ic-node, .node.current .ic-node { color: var(--teal); }
+.node.current .disc { fill: var(--teal); stroke: #fff; }
+.node.current .ic-node { color: #fff; }
+.node.done .disc { fill: var(--navy); stroke: var(--gold); }
+.node.done .ic-node { color: var(--gold); }
+.node.locked { cursor: not-allowed; }
+.node.locked .disc { stroke-dasharray: 4 4; }
+.node:not(.locked):hover .disc { transform-box: fill-box; transform-origin: center; transform: scale(1.08); }
+.node .num { font: 700 11px var(--display); fill: #fff; }
+.node .num-bg { fill: var(--navy); }
+.node.done .num-bg { fill: var(--green); }
+.node.locked .num-bg { fill: var(--muted); }
+.node .label-bg { fill: var(--surface); stroke: var(--line); }
+.node .label { font: 600 12.5px var(--font); fill: var(--ink); }
+.node .sublabel { font: 500 10.5px var(--font); fill: var(--muted); }
+.node .lock-ic { color: var(--muted); }
+.node.unlocking .disc { animation: unlock .9s ease; }
+@keyframes unlock { 30% { stroke: var(--gold); stroke-width: 8; } }
+
+.marker { pointer-events: none; }
+.marker-halo { fill: var(--gold); opacity: .35; }
+.marker-core { fill: var(--gold); stroke: #fff; stroke-width: 3; }
+.marker-ic { color: var(--navy); fill: var(--navy); stroke: var(--navy); }
+
+.module-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 22px; }
+.mcard {
+  display: flex; gap: 14px; align-items: flex-start; text-align: left; padding: 16px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.mcard:not(:disabled):hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--teal); }
+.mcard:disabled { opacity: .6; cursor: not-allowed; }
+.mcard .mi { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: var(--teal-soft); color: var(--teal); flex: none; }
+.mcard.done .mi { background: var(--navy); color: var(--gold); }
+.mcard.locked .mi { background: var(--surface-2); color: var(--muted); }
+.mcard .mi .ic { width: 22px; height: 22px; }
+.mcard h3 { font-size: 1rem; margin: 2px 0 4px; }
+.mcard .meta { display: flex; gap: 10px; font-size: .78rem; color: var(--muted); align-items: center; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 99px; font-size: .72rem; font-weight: 600; background: var(--surface-2); color: var(--ink-2); }
+.chip.ok { background: var(--green-soft); color: var(--green); }
+.chip.go { background: var(--gold-soft); color: #9a5f05; }
+:root[data-theme="dark"] .chip.go { color: var(--gold); }
+
+.prod-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 26px; padding: 14px 16px; border-radius: 12px; border: 1px dashed var(--line); color: var(--muted); font-size: .85rem; }
+.prod-note p { margin: 0; }
+.prod-note .ic { color: var(--gold); margin-top: 2px; }
+
+/* ─────────── player ─────────── */
+.player { display: grid; grid-template-columns: 280px 1fr; gap: 22px; align-items: start; }
+.player-side { position: sticky; top: 92px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+.side-icon { width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: var(--gold); margin-bottom: 10px; }
+.side-icon .ic { width: 26px; height: 26px; }
+.side-module h2 { font-size: 1.25rem; }
+.side-module p { margin: 0; font-size: .85rem; }
+.screen-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.screen-steps li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; font-size: .86rem; color: var(--muted); }
+.screen-steps li .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; flex: none; font-size: .7rem; font-weight: 700; }
+.screen-steps li.active { background: var(--teal-soft); color: var(--ink); font-weight: 600; }
+.screen-steps li.active .dot { border-color: var(--teal); color: var(--teal); }
+.screen-steps li.done .dot { background: var(--teal); border-color: var(--teal); color: #fff; }
+.narr-btn.playing { border-color: var(--teal); color: var(--teal); }
+
+.player-main { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; min-height: 560px; }
+.screen-progress { height: 5px; background: var(--surface-2); }
+.screen-progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .5s; }
+.screen { padding: 34px clamp(18px, 4vw, 44px); flex: 1; animation: slideIn .45s cubic-bezier(.2,.8,.2,1); }
+@keyframes slideIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+.player-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px clamp(18px, 4vw, 44px); border-top: 1px solid var(--line); background: var(--surface-2); }
+.nav-hint { font-size: .85rem; color: var(--muted); text-align: center; }
+
+.s-head { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+.s-icon { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal); flex: none; }
+.s-icon .ic { width: 28px; height: 28px; }
+.s-head h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); margin: 0; }
+.s-head .eyebrow { margin-bottom: 4px; }
+.s-body { font-size: 1.05rem; color: var(--ink-2); max-width: 70ch; }
+
+.hero { position: relative; border-radius: 18px; padding: 34px; background: linear-gradient(135deg, var(--navy), var(--navy-2) 60%, #0e5560); color: #fff; overflow: hidden; margin-bottom: 22px; }
+.hero h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); }
+.hero p { opacity: .85; max-width: 62ch; font-size: 1.05rem; }
+.hero .eyebrow { color: var(--gold); }
+.hero svg.hero-route { position: absolute; right: -20px; bottom: -10px; width: 340px; opacity: .25; }
+.hero-route path { fill: none; stroke: #fff; stroke-width: 3; stroke-dasharray: 8 8; animation: dash 20s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -400; } }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.tile { border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); display: flex; gap: 14px; align-items: flex-start; }
+.tile .ti { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal); flex: none; }
+.tile h3 { font-size: 1rem; margin: 0 0 4px; }
+.tile p { margin: 0; font-size: .92rem; color: var(--ink-2); }
+.bullets { display: grid; gap: 10px; margin-top: 18px; }
+.bullets .b { display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); animation: rise .5s both; }
+.bullets .b .ic { color: var(--teal); width: 22px; height: 22px; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+
+/* reveal / signposts */
+.reveal { cursor: pointer; text-align: left; color: inherit; width: 100%; position: relative; transition: border-color .2s, transform .2s; }
+.reveal:hover { border-color: var(--teal); transform: translateY(-2px); }
+.reveal .hide { color: var(--muted); font-style: italic; }
+.reveal.open { border-color: var(--teal); background: var(--teal-soft); }
+.reveal.open .ti { background: var(--teal); color: #fff; }
+.reveal .tick { position: absolute; top: 12px; right: 12px; color: var(--green); opacity: 0; transition: opacity .3s; }
+.reveal.open .tick { opacity: 1; }
+
+/* flip cards */
+.flips { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.flip { perspective: 900px; height: 210px; border: 0; background: none; padding: 0; color: inherit; }
+.flip-in { position: relative; width: 100%; height: 100%; transition: transform .6s cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+.flip.open .flip-in { transform: rotateY(180deg); }
+.flip-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border: 1px solid var(--line); }
+.flip-front { background: var(--surface); }
+.flip-front .ic { width: 40px; height: 40px; color: var(--teal); }
+.flip-front h3 { margin: 0; font-size: 1.15rem; }
+.flip-front small { color: var(--muted); }
+.flip-back { background: linear-gradient(135deg, var(--teal), #0b5f67); color: #fff; transform: rotateY(180deg); font-size: .95rem; }
+.flip-back b { font-family: var(--display); font-size: 1.05rem; }
+
+/* scenario + choices */
+.scene { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; border-radius: 16px; background: var(--gold-soft); border: 1px solid rgba(233,162,59,.4); margin-bottom: 18px; }
+.scene .si { width: 46px; height: 46px; border-radius: 50%; background: var(--gold); color: var(--navy); display: grid; place-items: center; flex: none; }
+.scene .lbl { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: #9a5f05; }
+:root[data-theme="dark"] .scene .lbl { color: var(--gold); }
+.scene p { margin: 4px 0 0; font-size: 1.05rem; }
+.bubble { position: relative; margin-top: 10px; padding: 12px 16px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); font-style: italic; font-weight: 500; }
+.q { font-weight: 700; font-size: 1.1rem; margin: 6px 0 14px; }
+.options { display: grid; gap: 10px; }
+.opt {
+  display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface);
+  color: var(--ink); text-align: left; font-size: 1rem; transition: border-color .15s, background .15s, transform .15s;
+}
+.opt:hover:not(:disabled) { border-color: var(--teal); transform: translateX(4px); }
+.opt .key { width: 32px; height: 32px; border-radius: 9px; background: var(--surface-2); display: grid; place-items: center; font-weight: 700; flex: none; font-family: var(--display); }
+.opt.correct { border-color: var(--green); background: var(--green-soft); }
+.opt.correct .key { background: var(--green); color: #fff; }
+.opt.wrong { border-color: var(--red); background: var(--red-soft); animation: shake .4s; }
+.opt.wrong .key { background: var(--red); color: #fff; }
+.opt.ok { border-color: var(--gold); background: var(--gold-soft); }
+.opt:disabled { cursor: default; }
+.tf-opts { grid-template-columns: 1fr 1fr; }
+.tf-opts .opt { justify-content: center; font-size: 1.2rem; font-weight: 700; padding: 22px; }
+@keyframes shake { 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+.feedback { margin-top: 16px; padding: 16px 18px; border-radius: 14px; display: flex; gap: 12px; align-items: flex-start; animation: rise .4s; }
+.feedback .ic { width: 24px; height: 24px; margin-top: 2px; }
+.feedback.good { background: var(--green-soft); color: var(--ink); border-left: 5px solid var(--green); }
+.feedback.good .ic { color: var(--green); }
+.feedback.bad { background: var(--red-soft); color: var(--ink); border-left: 5px solid var(--red); }
+.feedback.bad .ic { color: var(--red); }
+.feedback.mid { background: var(--gold-soft); border-left: 5px solid var(--gold); }
+.feedback.mid .ic { color: var(--gold); }
+.feedback p { margin: 0; }
+.feedback .pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.pts-float { position: fixed; z-index: 90; pointer-events: none; font: 800 1.3rem var(--display); color: var(--gold); text-shadow: 0 2px 8px rgba(0,0,0,.25); animation: floatUp 1.2s ease-out forwards; }
+@keyframes floatUp { to { transform: translateY(-70px); opacity: 0; } }
+
+/* match */
+.match { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.match-col { display: grid; gap: 10px; align-content: start; }
+.mt { display: flex; gap: 10px; align-items: center; padding: 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); text-align: left; transition: all .2s; min-height: 58px; }
+.mt .ic { color: var(--teal); width: 22px; height: 22px; }
+.mt.sel { border-color: var(--teal); background: var(--teal-soft); box-shadow: 0 0 0 4px rgba(20,163,168,.15); }
+.mt.matched { border-color: var(--green); background: var(--green-soft); opacity: .75; cursor: default; }
+.mt.matched .ic { color: var(--green); }
+.mt.nope { animation: shake .4s; border-color: var(--red); }
+.mt.sign { border-left: 6px solid var(--gold); }
+
+/* sort */
+.sort-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; min-height: 48px; padding: 12px; border: 2px dashed var(--line); border-radius: 14px; }
+.chipcard { padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); cursor: grab; font-size: .9rem; color: var(--ink); text-align: left; }
+.chipcard.sel { outline: 3px solid var(--teal); }
+.chipcard.placed-ok { background: var(--green-soft); border-color: var(--green); cursor: default; box-shadow: none; }
+.chipcard.dragging { opacity: .4; }
+.bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.bin { border: 2px solid var(--line); border-radius: 14px; padding: 12px; min-height: 140px; background: var(--surface-2); transition: border-color .2s, background .2s; display: flex; flex-direction: column; gap: 8px; text-align: left; color: var(--ink); }
+.bin.over, .bin.target { border-color: var(--teal); background: var(--teal-soft); }
+.bin-h { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: .92rem; }
+.bin-h .ic { color: var(--teal); }
+.bin.nope { animation: shake .4s; border-color: var(--red); }
+
+/* red flags */
+.radar-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.timer { display: flex; align-items: center; gap: 10px; font-weight: 700; font-family: var(--display); }
+.timer .ring { width: 44px; height: 44px; }
+.timer .ring circle { fill: none; stroke-width: 5; }
+.timer .ring .bg { stroke: var(--surface-2); }
+.timer .ring .fg { stroke: var(--teal); stroke-linecap: round; transform: rotate(-90deg); transform-origin: center; transition: stroke-dashoffset 1s linear, stroke .3s; }
+.timer.low .ring .fg { stroke: var(--red); }
+.inbox { display: grid; gap: 8px; }
+.mailrow { display: flex; gap: 14px; align-items: center; padding: 13px 16px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); text-align: left; transition: all .15s; }
+.mailrow .mi { width: 38px; height: 38px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-2); flex: none; }
+.mailrow .flagbox { margin-left: auto; width: 34px; height: 34px; border-radius: 9px; border: 2px solid var(--line); display: grid; place-items: center; color: transparent; flex: none; }
+.mailrow.tagged { border-color: var(--red); background: var(--red-soft); }
+.mailrow.tagged .flagbox { background: var(--red); border-color: var(--red); color: #fff; }
+.mailrow.res-ok { border-color: var(--green); }
+.mailrow.res-miss { border-color: var(--gold); background: var(--gold-soft); }
+.mailrow.res-false { border-color: var(--red); }
+.mailrow .why { display: block; font-size: .82rem; color: var(--muted); margin-top: 4px; }
+.mailrow .res { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+
+/* branch */
+.branch-track { display: flex; align-items: center; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.bt-step { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 99px; background: var(--surface-2); font-size: .8rem; font-weight: 600; color: var(--muted); }
+.bt-step.on { background: var(--teal); color: #fff; }
+.bt-step.done { background: var(--green-soft); color: var(--green); }
+.bt-sep { width: 22px; height: 2px; background: var(--line); }
+
+/* order */
+.order-list { display: grid; gap: 10px; counter-reset: ord; }
+.ord { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); cursor: grab; }
+.ord.dragging { opacity: .4; }
+.ord.over { border-color: var(--teal); }
+.ord .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--navy); color: #fff; font-weight: 700; font-family: var(--display); flex: none; }
+.ord .oi { color: var(--teal); width: 26px; height: 26px; }
+.ord .grip { color: var(--muted); }
+.ord h3 { margin: 0; font-size: 1rem; }
+.ord p { margin: 0; font-size: .88rem; color: var(--muted); }
+.ord .arrows { margin-left: auto; display: flex; gap: 4px; }
+.ord .arrows button { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); display: grid; place-items: center; }
+.order-list.solved .ord { border-color: var(--green); background: var(--green-soft); cursor: default; }
+
+/* myth/fact */
+.mf-card { border-radius: 18px; padding: 28px; background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; text-align: center; font-size: 1.2rem; font-weight: 600; min-height: 150px; display: grid; place-items: center; animation: rise .4s; }
+.mf-count { text-align: center; color: var(--muted); font-size: .85rem; margin: 10px 0; }
+.mf-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mf-btns .opt { justify-content: center; font-weight: 700; font-size: 1.05rem; }
+
+/* quiz */
+.quiz-hud { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 16px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); }
+.qh { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: .9rem; }
+.fuel-tanks { display: flex; gap: 4px; }
+.fuel-tanks .ic { color: var(--teal); width: 22px; height: 22px; }
+.fuel-tanks .ic.empty { color: var(--line); }
+.streak { color: var(--gold); }
+.streak.hot { animation: bump .5s; }
+.q-track { display: flex; gap: 6px; }
+.q-track span { width: 26px; height: 6px; border-radius: 99px; background: var(--line); }
+.q-track span.ok { background: var(--green); } .q-track span.no { background: var(--red); } .q-track span.cur { background: var(--teal); }
+.tbar { height: 6px; border-radius: 99px; background: var(--surface-2); overflow: hidden; margin-bottom: 18px; }
+.tbar i { display: block; height: 100%; background: var(--teal); transition: width 1s linear, background .3s; }
+.tbar.low i { background: var(--red); }
+.result { text-align: center; padding: 10px 0; }
+.result .big { font: 800 3.4rem var(--display); color: var(--teal); }
+.result.fail .big { color: var(--red); }
+.stars { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
+.stars .ic { width: 38px; height: 38px; color: var(--line); }
+.stars .ic.on { color: var(--gold); fill: var(--gold); animation: pop .5s both; }
+@keyframes pop { from { transform: scale(0); } 70% { transform: scale(1.25); } }
+.stat-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 14px 0; }
+.stat { padding: 10px 16px; border-radius: 12px; background: var(--surface-2); font-size: .85rem; }
+.stat b { display: block; font-size: 1.2rem; font-family: var(--display); }
+
+/* takeaway */
+.pcda { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; position: relative; }
+.pc { position: relative; padding: 22px 18px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); text-align: center; animation: rise .5s both; }
+.pc .pi { width: 60px; height: 60px; margin: 0 auto 12px; border-radius: 50%; display: grid; place-items: center; background: var(--navy); color: var(--gold); }
+.pc .pi .ic { width: 28px; height: 28px; }
+.pc .step { position: absolute; top: 10px; left: 12px; font: 700 .75rem var(--display); color: var(--teal); }
+.pc h3 { margin: 0 0 6px; }
+.pc p { margin: 0; font-size: .9rem; color: var(--ink-2); }
+textarea { width: 100%; font-size: 16px; min-height: 140px; border-radius: 14px; border: 2px solid var(--line); padding: 14px; font: inherit; background: var(--surface); color: var(--ink); resize: vertical; }
+textarea:focus { border-color: var(--teal); outline: none; }
+input[type=text] { width: 100%; font-size: 16px; padding: 13px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; }
+input[type=text]:focus { border-color: var(--teal); outline: none; }
+
+/* certificate */
+.cert { position: relative; border-radius: 18px; padding: 40px; text-align: center; background: var(--surface); border: 2px solid var(--navy); box-shadow: inset 0 0 0 8px var(--surface), inset 0 0 0 10px var(--gold); }
+.cert .seal { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 16px; display: grid; place-items: center; background: linear-gradient(135deg, var(--gold), #c97f12); color: var(--navy); }
+.cert .seal .ic { width: 40px; height: 40px; }
+.cert h2 { font-size: 2rem; }
+.cert .name { font: 700 2rem var(--display); color: var(--teal); margin: 8px 0; border-bottom: 2px solid var(--line); display: inline-block; padding: 0 24px 6px; }
+.cert .badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+.cert .badges span { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: var(--gold); display: grid; place-items: center; }
+
+/* modal + toasts */
+.modal { position: fixed; inset: 0; z-index: 60; background: rgba(5, 14, 28, .55); backdrop-filter: blur(4px); display: grid; place-items: center; padding: 16px; animation: fade .2s; }
+@keyframes fade { from { opacity: 0; } }
+.modal-card { width: min(560px, 100%); max-height: 90vh; overflow: auto; background: var(--surface); border-radius: 22px; padding: 28px; box-shadow: var(--shadow); animation: rise .3s; }
+.modal-card h2 { display: flex; align-items: center; gap: 10px; }
+.modal-card h2 .ic { color: var(--teal); }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
+.passport { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.stamp { text-align: center; padding: 14px 6px; border-radius: 14px; border: 2px dashed var(--line); font-size: .75rem; color: var(--muted); }
+.stamp .si { width: 46px; height: 46px; margin: 0 auto 8px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); }
+.stamp.got { border-style: solid; border-color: var(--gold); color: var(--ink); background: var(--gold-soft); }
+.stamp.got .si { background: var(--navy); color: var(--gold); }
+.board { width: 100%; border-collapse: collapse; }
+.board td, .board th { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; font-size: .92rem; }
+.board th { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.board tr.me td { background: var(--teal-soft); font-weight: 700; }
+.badge-pop { text-align: center; }
+.badge-pop .big-badge { width: 110px; height: 110px; margin: 0 auto 14px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 30% 30%, var(--navy-2), var(--navy)); color: var(--gold); box-shadow: 0 0 0 6px var(--gold-soft), 0 0 0 8px var(--gold); animation: pop .6s both; }
+.badge-pop .big-badge .ic { width: 52px; height: 52px; }
+.toasts { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 80; display: grid; gap: 8px; }
+.toast { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; background: var(--navy); color: #fff; box-shadow: var(--shadow); animation: rise .3s; font-size: .9rem; max-width: 340px; }
+.toast .ic { color: var(--gold); }
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 95; width: 100%; height: 100%; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .player { grid-template-columns: 1fr; }
+  .player-side { position: static; }
+  .screen-steps { display: none; }
+  .hud-level, .hud-progress { display: none; }
+}
+@media (max-width: 640px) {
+  .view { padding-block: 18px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .topbar { padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .brand-sub { display: none; }
+  .hud-item { padding: 5px 9px; }
+  .match { grid-template-columns: 1fr; }
+  .passport { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding: 24px; }
+  .node .label-g { display: none; }
+  .player-nav .nav-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+@media print {
+  .topbar, .player-side, .player-nav, .screen-progress, #toasts { display: none !important; }
+  .player { display: block; } .player-main { box-shadow: none; border: 0; }
+  .cert-actions { display: none; }
+}
+
+</style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e7c86' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ═════════════ ICON SPRITE (verbiage-matched line icons) ═════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+    <symbol id="i-signpost" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 6h12l3 2.5L17 11H5z"/><path d="M19 13H8l-3 2.5L8 18h11z"/><path d="M9 21h6"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+    <symbol id="i-navigation" viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></symbol>
+    <symbol id="i-mapPin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M3 22h12"/><path d="M4 9h10"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L18 5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+    <symbol id="i-listChecks" viewBox="0 0 24 24"><path d="M3 17l2 2 4-4"/><path d="M3 7l2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 7h18"/><path d="M6 7l-3 7a3 3 0 0 0 6 0z"/><path d="M18 7l-3 7a3 3 0 0 0 6 0z"/><path d="M8 21h8"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-userCheck" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M16 11l2 2 4-4"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-fileText" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.17-2.83L3 3"/><path d="M21 3l-6.5 6.5"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 15V9"/><path d="M14 15V9"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+    <symbol id="i-volumeX" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6"/><path d="M17 9l6 6"/></symbol>
+    <symbol id="i-arrowRight" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrowLeft" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+    <symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ═════════════ TOP BAR / HUD ═════════════ -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"><svg class="ic"><use href="#i-mapPin"/></svg></span>
+    <div>
+      <div class="brand-title">Compliance Route <span>101</span></div>
+      <div class="brand-sub">Making responsible decisions at work</div>
+    </div>
+  </div>
+  <div class="hud" aria-live="polite">
+    <div class="hud-item" title="Route points"><svg class="ic"><use href="#i-star"/></svg><b id="hudPoints">0</b><small>pts</small></div>
+    <div class="hud-item hud-level" title="Navigator level"><svg class="ic"><use href="#i-award"/></svg><span id="hudLevel">Trainee Navigator</span></div>
+    <div class="hud-item" title="Badges earned"><svg class="ic"><use href="#i-shield"/></svg><b id="hudBadges">0</b><small>/8</small></div>
+    <div class="hud-progress" title="Course progress"><div class="bar"><i id="hudBar"></i></div><span id="hudPct">0%</span></div>
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode"><svg class="ic"><use href="#i-moon"/></svg></button>
+  </div>
+</header>
+
+<main id="app">
+  <!-- ═════════════ MAP VIEW ═════════════ -->
+  <section id="mapView" class="view">
+    <div class="map-head">
+      <div>
+        <p class="eyebrow"><svg class="ic"><use href="#i-navigation"/></svg> Your route · <span id="learnerName">Navigator</span></p>
+        <h1>Compliance Route <span class="accent">101</span></h1>
+        <p class="lead">Eight checkpoints. One destination: confident, responsible decisions. Complete each stop to unlock the next stretch of road.</p>
+      </div>
+      <div class="map-actions">
+        <button class="btn btn-primary" id="continueBtn"><svg class="ic"><use href="#i-navigation"/></svg><span>Start the route</span></button>
+        <button class="btn btn-ghost" id="passportBtn"><svg class="ic"><use href="#i-award"/></svg>Route Passport</button>
+        <button class="btn btn-ghost" id="boardBtn"><svg class="ic"><use href="#i-trophy"/></svg>Leaderboard</button>
+        <button class="btn btn-ghost" id="restartBtn"><svg class="ic"><use href="#i-refresh"/></svg>Restart course</button>
+      </div>
+    </div>
+
+    <form id="nameCard" class="name-card hidden" autocomplete="on">
+      <span class="name-ic"><svg class="ic"><use href="#i-mapPin"/></svg></span>
+      <div class="name-fields">
+        <label for="nameInline"><b>Welcome, navigator.</b> Type your name to start. It appears on your Route Passport, the leaderboard and your certificate.</label>
+        <div class="name-row">
+          <input type="text" id="nameInline" name="name" maxlength="40" placeholder="Your name" autocomplete="name" enterkeyhint="go">
+          <button type="submit" class="btn btn-primary"><svg class="ic"><use href="#i-navigation"/></svg>Begin the route</button>
+        </div>
+        <p class="name-err hidden" id="nameErr">Type your name first, then tap Begin the route.</p>
+      </div>
+    </form>
+
+    <div class="map-wrap">
+      <svg id="routeMap" viewBox="0 0 1200 620" role="img" aria-label="Course route map with eight checkpoints">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" class="grid-line"/></pattern>
+          <linearGradient id="routeGrad" x1="0" x2="1"><stop offset="0" class="g1"/><stop offset="1" class="g2"/></linearGradient>
+          <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity=".18"/></filter>
+        </defs>
+        <rect width="1200" height="620" class="map-bg"/>
+        <rect width="1200" height="620" fill="url(#grid)"/>
+        <!-- terrain / districts -->
+        <g class="terrain">
+          <path d="M0 470 C 140 430 260 520 420 500 S 700 560 860 520 S 1100 560 1200 520 V620 H0z" class="land l1"/>
+          <path d="M760 0 C 820 70 940 90 1020 60 S 1160 20 1200 40 V0z" class="land l2"/>
+          <ellipse cx="600" cy="110" rx="160" ry="62" class="water"/>
+          <ellipse cx="620" cy="116" rx="96" ry="32" class="water w2"/>
+          <g class="contours">
+            <circle cx="980" cy="80" r="62"/><circle cx="980" cy="80" r="40"/><circle cx="980" cy="80" r="20"/>
+            <circle cx="200" cy="130" r="60"/><circle cx="200" cy="130" r="38"/>
+          </g>
+          <g class="blocks">
+            <rect x="330" y="250" width="34" height="26" rx="4"/><rect x="370" y="246" width="22" height="30" rx="4"/>
+            <rect x="620" y="390" width="30" height="22" rx="4"/><rect x="656" y="384" width="20" height="28" rx="4"/>
+            <rect x="60" y="330" width="26" height="22" rx="4"/><rect x="1110" y="330" width="28" height="20" rx="4"/>
+          </g>
+        </g>
+        <g class="compass-rose" transform="translate(1140 560)">
+          <circle r="34"/><path d="M0 -30 L7 0 L0 30 L-7 0Z"/><path d="M0 -30 L7 0 L-7 0Z" class="n"/>
+          <text y="-38" text-anchor="middle">N</text>
+        </g>
+        <!-- road -->
+        <path id="roadBase" class="road-base" d=""/>
+        <path id="roadDash" class="road-dash" d=""/>
+        <path id="roadDone" class="road-done" d=""/>
+        <g id="nodes"></g>
+        <g id="marker" class="marker" filter="url(#soft)">
+          <circle r="17" class="marker-halo"/>
+          <circle r="13" class="marker-core"/>
+          <use href="#i-navigation" x="-8" y="-8" width="16" height="16" class="marker-ic"/>
+        </g>
+      </svg>
+    </div>
+
+    <div id="moduleList" class="module-list"></div>
+
+    <footer class="prod-note">
+      <svg class="ic"><use href="#i-alert"/></svg>
+      <p><b>Production note:</b> This is an illustrative model. The scenario, terminology, policies, reporting channels and assessment answers should be reviewed and approved by PRCI before development.</p>
+    </footer>
+  </section>
+
+  <!-- ═════════════ MODULE PLAYER ═════════════ -->
+  <section id="playerView" class="view hidden" aria-live="polite">
+    <div class="player">
+      <aside class="player-side">
+        <button class="btn btn-ghost btn-sm" id="backToMap"><svg class="ic"><use href="#i-map"/></svg>Back to map</button>
+        <div class="side-module">
+          <div class="side-icon"><svg class="ic"><use id="sideIcon" href="#i-flag"/></svg></div>
+          <p class="eyebrow" id="sideEyebrow">Checkpoint 1</p>
+          <h2 id="sideTitle">Module</h2>
+          <p class="muted" id="sideMeta"></p>
+        </div>
+        <ol id="screenSteps" class="screen-steps"></ol>
+        <button class="btn btn-ghost btn-sm narr-btn" id="narrBtn"><svg class="ic"><use href="#i-volume"/></svg><span>Play narration</span></button>
+      </aside>
+      <div class="player-main">
+        <div class="screen-progress"><i id="screenBar"></i></div>
+        <article id="screen" class="screen"></article>
+        <div class="player-nav">
+          <button class="btn btn-ghost" id="prevBtn"><svg class="ic"><use href="#i-arrowLeft"/></svg>Back</button>
+          <span class="nav-hint" id="navHint"></span>
+          <button class="btn btn-primary" id="nextBtn">Continue<svg class="ic"><use href="#i-arrowRight"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═════════════ DIALOGS ═════════════ -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<canvas id="confetti"></canvas>
+
+<script>
+/*
+ * Compliance Route 101 — course content
+ * ------------------------------------------------------------------
+ * Built from the "Sample Course Script: Compliance 101".
+ * PRODUCTION NOTE: the scenario, terminology, policies, reporting
+ * channels and assessment answers must be reviewed and approved by
+ * PRCI subject-matter experts before release.
+ */
+window.COURSE = {
+  title: "Compliance Route 101",
+  tagline: "Making responsible decisions at work",
+  duration: "≈ 90 minutes",
+  passMark: 0.8,
+  levels: [
+    { min: 0,    title: "Trainee Navigator" },
+    { min: 250,  title: "Route Scout" },
+    { min: 600,  title: "Checkpoint Specialist" },
+    { min: 1000, title: "Compliance Pathfinder" },
+    { min: 1400, title: "Integrity Guide" }
+  ],
+
+  modules: [
+    /* ───────────────────────────── MODULE 1 ───────────────────────────── */
+    {
+      id: 1, icon: "flag", title: "Welcome & Orientation", short: "Start",
+      minutes: 5, district: "Trailhead",
+      badge: { id: "trailhead", name: "Trailhead Ready", icon: "flag" },
+      screens: [
+        {
+          type: "intro", icon: "map",
+          title: "Welcome to Compliance Route 101",
+          subtitle: "Making responsible decisions at work",
+          body: "In this course, you’ll explore how compliance connects to everyday decisions, how to recognize a potential concern, and where to turn for guidance. You’ll work through a practical scenario and complete short knowledge checks along the way.",
+          narration: "Welcome to Compliance 101. In this course, you’ll explore how compliance connects to everyday decisions, how to recognize a potential concern, and where to turn for guidance. You’ll work through a practical scenario and complete short knowledge checks along the way."
+        },
+        {
+          type: "objectives", icon: "target",
+          title: "Your destinations on this route",
+          lead: "By the end of this course, you will be able to… Select each signpost to reveal it.",
+          narration: "As you move through the course, focus on how these principles apply to your role and your organization’s policies. The goal is to help you recognize when a situation needs attention and know how to respond.",
+          points: 10,
+          items: [
+            { icon: "compass",  title: "Explain",   text: "Explain compliance fundamentals and how a compliance program supports responsible organizational practices." },
+            { icon: "search",   title: "Recognize", text: "Recognize potential compliance concerns in common workplace situations." },
+            { icon: "signpost", title: "Choose",    text: "Apply a basic decision-making process and choose an appropriate next step when a concern arises." },
+            { icon: "megaphone",title: "Identify",  text: "Identify where to seek guidance and the appropriate channels for reporting concerns." }
+          ]
+        },
+        {
+          type: "howto", icon: "navigation",
+          title: "How the route works",
+          narration: "Each module is a checkpoint on your map. Complete a checkpoint to unlock the next stretch of road. Earn route points, collect badges and level up as you go.",
+          items: [
+            { icon: "mapPin", title: "Checkpoints", text: "Each module is a stop on the map. Finish one to unlock the next stretch of the route." },
+            { icon: "star",   title: "Route Points", text: "Earn points for sound decisions, accuracy and speed. Points raise your navigator level." },
+            { icon: "award",  title: "Badges", text: "Each completed checkpoint awards a badge for your Route Passport." },
+            { icon: "fuel",   title: "Fuel", text: "In the Final Route Challenge, wrong turns cost fuel. Keep your tank above empty to finish strong." }
+          ]
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 2 ───────────────────────────── */
+    {
+      id: 2, icon: "compass", title: "Compliance Fundamentals", short: "Fundamentals",
+      minutes: 12, district: "Foundation Quarter",
+      badge: { id: "foundation", name: "Foundation Builder", icon: "compass" },
+      screens: [
+        {
+          type: "pillars", icon: "compass",
+          title: "What does compliance mean?",
+          lead: "Compliance supports responsible, consistent decisions. Flip each card to explore the four building blocks.",
+          narration: "Compliance helps an organization carry out its responsibilities in a consistent and accountable way. Policies and procedures provide guidance, while employees help put that guidance into practice. When something is unclear, asking questions early can help prevent a concern from becoming more serious.",
+          points: 10,
+          cards: [
+            { icon: "book",       title: "Policies",       back: "The organization’s approved expectations — the “what” and the “why” behind responsible conduct." },
+            { icon: "listChecks", title: "Procedures",     back: "The step-by-step process for carrying out a policy consistently — the “how”." },
+            { icon: "help",       title: "Guidance",       back: "Support from managers and designated contacts when a situation isn’t clear-cut." },
+            { icon: "scale",      title: "Accountability", back: "Each person owns their decisions, follows the approved process and documents as directed." }
+          ]
+        },
+        {
+          type: "intro", icon: "shield",
+          title: "Why a compliance program matters",
+          body: "A compliance program gives everyone the same map. It helps the organization meet its responsibilities, treat people and partners fairly, protect its reputation, and catch issues early — while they are still small and easier to resolve.",
+          bullets: [
+            { icon: "check",  text: "Consistent decisions across teams and locations" },
+            { icon: "eye",    text: "Early visibility into questions and concerns" },
+            { icon: "shield", text: "Protection for employees, partners and the organization" },
+            { icon: "users",  text: "A shared culture of accountability and trust" }
+          ],
+          narration: "A compliance program gives everyone the same map. It helps the organization meet its responsibilities, protect its reputation and catch issues early, while they are still small and easier to resolve."
+        },
+        {
+          type: "match", icon: "compass",
+          title: "Road-sign match",
+          lead: "Select a building block, then select the road sign that describes it.",
+          narration: "Let's check your bearings. Match each building block of compliance to its description.",
+          points: 15,
+          pairs: [
+            { icon: "book",       term: "Policies",       def: "Approved expectations for conduct" },
+            { icon: "listChecks", term: "Procedures",     def: "Step-by-step way to carry out an expectation" },
+            { icon: "help",       term: "Guidance",       def: "Support when a situation is unclear" },
+            { icon: "scale",      term: "Accountability", def: "Owning decisions and documenting as directed" }
+          ]
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 3 ───────────────────────────── */
+    {
+      id: 3, icon: "users", title: "Roles, Responsibilities & Policies", short: "Roles",
+      minutes: 12, district: "Policy Plaza",
+      badge: { id: "roles", name: "Team Navigator", icon: "users" },
+      screens: [
+        {
+          type: "channels", icon: "users",
+          title: "Everyone has a role on the route",
+          lead: "Compliance isn’t one department’s job. Select each role to see how it contributes.",
+          narration: "Compliance works when everyone plays their part. Employees, managers, the compliance function and leadership each have a role in keeping decisions consistent and accountable.",
+          points: 10,
+          items: [
+            { icon: "user",      title: "Employees",  text: "Know the policies that apply to your role, follow approved procedures, ask questions early and raise concerns through appropriate channels." },
+            { icon: "userCheck", title: "Managers",   text: "Model expected behavior, help their teams understand procedures, respond to questions and escalate concerns as directed." },
+            { icon: "shield",    title: "Compliance Function", text: "Maintains the program, provides guidance and training, and manages concerns through the approved process." },
+            { icon: "building",  title: "Leadership", text: "Sets the tone at the top, supports the program with resources and holds the organization accountable." }
+          ]
+        },
+        {
+          type: "sort", icon: "users",
+          title: "Who owns this stop?",
+          lead: "Drag (or tap) each responsibility to the role it best describes.",
+          narration: "Now sort each responsibility to the role that owns it.",
+          points: 20,
+          bins: [
+            { id: "emp", label: "Employees",  icon: "user" },
+            { id: "mgr", label: "Managers",   icon: "userCheck" },
+            { id: "cmp", label: "Compliance Function", icon: "shield" },
+            { id: "lead", label: "Leadership", icon: "building" }
+          ],
+          items: [
+            { text: "Follow the approved procedure for your daily tasks", bin: "emp" },
+            { text: "Ask a question when a request seems unclear", bin: "emp" },
+            { text: "Help the team understand how a procedure applies", bin: "mgr" },
+            { text: "Escalate a concern raised by a team member as directed", bin: "mgr" },
+            { text: "Provide compliance training and guidance", bin: "cmp" },
+            { text: "Manage reported concerns through the approved process", bin: "cmp" },
+            { text: "Set the tone at the top and model integrity", bin: "lead" },
+            { text: "Provide resources that support the program", bin: "lead" }
+          ]
+        },
+        {
+          type: "choice", icon: "book",
+          title: "Checkpoint: finding the right policy",
+          scenario: { icon: "book", label: "Situation", text: "You’re asked to complete a task you haven’t done before, and you aren’t sure which policy applies." },
+          question: "What is the best first move?",
+          narration: "You’re asked to complete a new task and you aren’t sure which policy applies. What's your best first move?",
+          points: 20,
+          options: [
+            { text: "Use the approach a coworker used last year.", correct: false },
+            { text: "Locate the applicable policy or procedure, and ask your manager or the designated contact if it’s still unclear.", correct: true },
+            { text: "Skip the task until someone else notices it.", correct: false }
+          ],
+          feedback: {
+            correct: "Exactly. Policies and procedures are your map — and your manager or designated contact can help you read it.",
+            incorrect: "Not quite. Past practice may be outdated and avoiding the task doesn’t resolve it. Start with the applicable policy and ask for guidance if it’s unclear."
+          }
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 4 ───────────────────────────── */
+    {
+      id: 4, icon: "alert", title: "Recognizing Potential Concerns", short: "Red Flags",
+      minutes: 15, district: "Watchtower Ridge",
+      badge: { id: "spotter", name: "Red Flag Spotter", icon: "eye" },
+      screens: [
+        {
+          type: "intro", icon: "alert",
+          title: "Warning signs on the road",
+          body: "A potential concern isn’t always obvious. Often it shows up as a small detour from the normal process. You don’t need to prove anything — you just need to notice, pause and check.",
+          bullets: [
+            { icon: "clock",    text: "Pressure to rush or skip a step — “just approve it today”" },
+            { icon: "fileText", text: "Missing, incomplete or “to-follow-later” documentation" },
+            { icon: "split",    text: "Requests to bypass a standard review or approval" },
+            { icon: "eye",      text: "Secrecy, unusual changes or requests outside normal channels" }
+          ],
+          narration: "A potential concern isn't always obvious. It often shows up as a small detour from the normal process: pressure to rush, missing documentation, a request to bypass a review, or unusual secrecy. You don't need to prove anything. Just notice, pause and check."
+        },
+        {
+          type: "redflags", icon: "search",
+          title: "Red Flag Radar",
+          lead: "Your inbox this morning. Tag every item that could signal a potential concern, then submit. Beat the clock for a speed bonus!",
+          narration: "Time for Red Flag Radar. Scan your inbox and tag every item that could signal a potential compliance concern.",
+          seconds: 60, points: 10,
+          items: [
+            { icon: "receipt",  text: "Vendor: “Please approve the invoice today — I’ll send the details later.”", flag: true,  why: "Pressure to approve without supporting documentation." },
+            { icon: "calendar", text: "Team calendar invite for the quarterly planning meeting.", flag: false, why: "Routine business activity." },
+            { icon: "split",    text: "Colleague: “Can you skip the second review this time? It always passes.”", flag: true,  why: "A request to bypass a standard review step." },
+            { icon: "fileText", text: "HR reminder: annual policy acknowledgment is due next month.", flag: false, why: "Routine reminder through a normal channel." },
+            { icon: "mail",     text: "Vendor asks to change their bank details by email, effective immediately.", flag: true,  why: "Unusual, urgent change outside the normal verification process." },
+            { icon: "gift",     text: "Supplier offers you an expensive gift while a contract decision is pending.", flag: true,  why: "Could create a conflict of interest — check the applicable policy." },
+            { icon: "listChecks", text: "Procurement shares the updated, approved purchasing checklist.", flag: false, why: "Approved guidance shared through the proper channel." },
+            { icon: "eye",      text: "Manager: “Let’s keep this between us — no need to log it.”", flag: true,  why: "Secrecy and avoiding documentation are warning signs." }
+          ]
+        },
+        {
+          type: "choice", icon: "alert",
+          title: "Checkpoint: is it a concern?",
+          scenario: { icon: "split", label: "Situation", text: "A teammate says, “Everyone skips this verification step when we’re busy. It’s fine.”" },
+          question: "How should you view this situation?",
+          narration: "A teammate says everyone skips a verification step when it's busy. How should you view this?",
+          points: 20,
+          options: [
+            { text: "It’s fine — if everyone does it, it must be acceptable.", correct: false },
+            { text: "It may be a potential concern; check the procedure and seek guidance.", correct: true },
+            { text: "It’s only a concern if something has already gone wrong.", correct: false }
+          ],
+          feedback: {
+            correct: "Right. “Everyone does it” doesn’t make a shortcut approved. Check the procedure and ask.",
+            incorrect: "Common practice isn’t the same as approved practice, and you don’t need to wait for harm. Check the procedure and seek guidance."
+          }
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 5 ───────────────────────────── */
+    {
+      id: 5, icon: "signpost", title: "Scenario-Based Decision Practice", short: "Decisions",
+      minutes: 20, district: "Crossroads Junction",
+      badge: { id: "crossroads", name: "Crossroads Decider", icon: "signpost" },
+      screens: [
+        {
+          type: "branch", icon: "briefcase",
+          title: "Scenario: A vendor request",
+          narration: "Consider the situation. The request may be routine, or it may raise a question that needs to be checked. What would you do first?",
+          start: "s1",
+          nodes: {
+            s1: {
+              scene: { icon: "briefcase", who: "Vendor", quote: "We’re in a hurry — please approve it today, and I’ll send the details later." },
+              context: "A vendor asks you to approve an invoice before you’ve reviewed the supporting documentation.",
+              question: "What should you do first?",
+              options: [
+                { text: "A. Approve the invoice to avoid delaying payment.", quality: "risky", points: 0, next: "s1fb",
+                  feedback: "Before proceeding, check the applicable process and seek guidance if the request or documentation is unclear." },
+                { text: "B. Pause and review the applicable procedure or ask an appropriate contact for guidance.", quality: "best", points: 50, next: "s2",
+                  feedback: "Pausing to check the applicable procedure and seeking guidance when needed helps you make an informed decision. Follow PRCI’s approved policies and reporting channels, and document the concern as directed." },
+                { text: "C. Ignore the request and take no further action.", quality: "risky", points: 0, next: "s1fb",
+                  feedback: "Before proceeding, check the applicable process and seek guidance if the request or documentation is unclear. Ignoring it leaves the question unresolved." }
+              ]
+            },
+            s1fb: { retry: "s1" },
+            s2: {
+              scene: { icon: "clipboard", who: "Procedure", quote: "Invoices require complete supporting documentation before approval." },
+              context: "You checked the procedure. It’s clear: supporting documentation is required first. The vendor calls again and pushes harder.",
+              question: "What’s your next move?",
+              options: [
+                { text: "Explain that the procedure requires documentation before approval and request it.", quality: "best", points: 50, next: "s3",
+                  feedback: "Well navigated. You followed the approved process and communicated it respectfully." },
+                { text: "Approve half the amount now as a compromise.", quality: "risky", points: 0, next: "s2fb",
+                  feedback: "A partial approval still bypasses the required documentation. Stay on the approved route." },
+                { text: "Ask your manager or the designated contact how to handle the vendor’s pressure.", quality: "ok", points: 35, next: "s3",
+                  feedback: "Good call — seeking guidance is always appropriate. Remember that the procedure already gives you a clear answer." }
+              ]
+            },
+            s2fb: { retry: "s2" },
+            s3: {
+              scene: { icon: "fileText", who: "You", quote: "I should make a record of this." },
+              context: "The vendor’s pressure felt unusual. Your organization’s guidance says to document concerns as directed.",
+              question: "What’s the best way to document it?",
+              options: [
+                { text: "Record the facts — date, request, what was missing and who you contacted — as directed by policy.", quality: "best", points: 50, next: "end",
+                  feedback: "Clear, factual documentation helps the right people review the situation." },
+                { text: "Write down your opinion of the vendor’s character.", quality: "risky", points: 0, next: "s3fb",
+                  feedback: "Stick to facts, not opinions or speculation." },
+                { text: "Don’t document anything — it worked out.", quality: "risky", points: 0, next: "s3fb",
+                  feedback: "Documenting as directed creates a reliable record, even when the outcome seems fine." }
+              ]
+            },
+            s3fb: { retry: "s3" }
+          }
+        },
+        {
+          type: "order", icon: "navigation",
+          title: "Plot the route: P · C · D · A",
+          lead: "Drag (or use the arrows) to put the four steps for unclear situations in the right order.",
+          narration: "Pause. Check. Document. Seek guidance. Put the four steps of the route in order.",
+          points: 30,
+          items: [
+            { icon: "pause",     title: "Pause",  text: "Stop before acting on an unclear request." },
+            { icon: "clipboard", title: "Check",  text: "Review the relevant policy or procedure." },
+            { icon: "fileText",  title: "Document", text: "Record the facts as directed." },
+            { icon: "help",      title: "Ask for guidance", text: "Use an appropriate channel to ask." }
+          ]
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 6 ───────────────────────────── */
+    {
+      id: 6, icon: "megaphone", title: "Asking Questions & Reporting Concerns", short: "Speak Up",
+      minutes: 12, district: "Speak-Up Station",
+      badge: { id: "speakup", name: "Speak-Up Navigator", icon: "megaphone" },
+      screens: [
+        {
+          type: "channels", icon: "megaphone",
+          title: "Your guidance channels",
+          lead: "There’s more than one road to the right answer. Select each channel. (Final channel names and contact details to be confirmed by PRCI.)",
+          narration: "There is more than one road to the right answer. You can ask your manager, a designated compliance contact, other designated functions, or use an approved reporting line. Always follow your organization's guidance for raising concerns.",
+          points: 10,
+          items: [
+            { icon: "userCheck", title: "Your Manager or Supervisor", text: "Often the quickest first stop for questions about a process or request." },
+            { icon: "shield",    title: "Compliance Contact", text: "The designated compliance team or officer for guidance and for raising concerns." },
+            { icon: "building",  title: "Other Designated Functions", text: "Such as HR or Legal, when your organization’s policy directs you there." },
+            { icon: "phone",     title: "Approved Reporting Line", text: "An approved reporting channel, which may allow concerns to be raised confidentially as permitted by policy." }
+          ]
+        },
+        {
+          type: "choice", icon: "help",
+          title: "Knowledge check",
+          badgeLabel: "True or False",
+          scenario: { icon: "help", label: "True or false?", text: "If you are unsure whether a situation raises a compliance concern, you should wait until you have proof before asking for guidance." },
+          question: "Select your answer.",
+          narration: "True or false: If you are unsure whether a situation raises a compliance concern, you should wait until you have proof before asking for guidance.",
+          points: 25, tf: true,
+          options: [
+            { text: "True", correct: false },
+            { text: "False", correct: true }
+          ],
+          feedback: {
+            correct: "Correct — False. You do not need to determine whether a violation occurred before asking a question or using an appropriate reporting channel. Follow your organization’s guidance for raising concerns.",
+            incorrect: "The answer is False. You do not need to determine whether a violation occurred before asking a question or using an appropriate reporting channel. Follow your organization’s guidance for raising concerns."
+          }
+        },
+        {
+          type: "mythfact", icon: "message",
+          title: "Myth or Fact? Speed round",
+          lead: "Decide whether each statement is a myth or a fact.",
+          narration: "Speed round. Decide whether each statement is a myth or a fact.",
+          points: 10,
+          statements: [
+            { text: "Asking a question early can help prevent a concern from becoming more serious.", fact: true },
+            { text: "Only managers are allowed to raise compliance concerns.", fact: false, why: "Everyone can ask questions and raise concerns through appropriate channels." },
+            { text: "I should investigate the situation myself before reporting it.", fact: false, why: "Your role is to raise the concern; the approved process handles review." },
+            { text: "Following the organization’s reporting guidance helps concerns reach the right people.", fact: true }
+          ]
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 7 ───────────────────────────── */
+    {
+      id: 7, icon: "target", title: "Final Route Challenge", short: "Assessment",
+      minutes: 10, district: "Summit Checkpoint",
+      badge: { id: "summit", name: "Summit Achiever", icon: "target" },
+      screens: [
+        {
+          type: "quiz", icon: "target",
+          title: "Final Route Challenge",
+          lead: "Six checkpoints stand between you and the summit. You have 3 fuel tanks — each wrong turn costs one. Answer quickly for time bonuses and build a streak for a multiplier. Score 80% or higher to pass.",
+          narration: "This is the Final Route Challenge. Answer each checkpoint question. Wrong turns cost fuel, quick answers earn time bonuses, and streaks multiply your points. You need eighty percent to pass.",
+          seconds: 30, fuel: 3, base: 50,
+          questions: [
+            {
+              q: "You receive a request to bypass a standard review step, but you are unsure whether the request is authorized. What is the most appropriate next step?",
+              options: [
+                "Proceed because the request came from a colleague.",
+                "Pause and consult the relevant procedure or an appropriate contact before proceeding.",
+                "Delete the request and take no further action."
+              ],
+              answer: 1,
+              feedback: "Checking the applicable procedure and seeking guidance helps ensure that the decision follows the organization’s approved process."
+            },
+            {
+              q: "What is the main purpose of a compliance program?",
+              options: [
+                "To help the organization carry out its responsibilities in a consistent and accountable way.",
+                "To make decisions on behalf of every employee.",
+                "To replace the need for policies and procedures."
+              ],
+              answer: 0,
+              feedback: "Compliance supports responsible, consistent and accountable decisions across the organization."
+            },
+            {
+              q: "A vendor asks you to approve an invoice today and says supporting details will follow later. What should you do first?",
+              options: [
+                "Approve it to keep the relationship positive.",
+                "Ignore the request.",
+                "Pause, check the applicable procedure and seek guidance if anything is unclear."
+              ],
+              answer: 2,
+              feedback: "Pause • Check • Document • Seek guidance — the approved route for unclear requests."
+            },
+            {
+              q: "True or false: You must prove a violation occurred before you raise a concern.",
+              options: ["True", "False"],
+              answer: 1,
+              feedback: "False. You can ask a question or raise a concern through an appropriate channel without proof."
+            },
+            {
+              q: "Which of these is a potential red flag?",
+              options: [
+                "A request to keep a decision “off the record” and skip documentation.",
+                "A reminder to complete annual policy training.",
+                "An approved checklist shared by procurement."
+              ],
+              answer: 0,
+              feedback: "Secrecy and avoiding documentation are common warning signs worth checking."
+            },
+            {
+              q: "When documenting a concern, what should you record?",
+              options: [
+                "Your personal opinions about the people involved.",
+                "The relevant facts — what happened, when, and who you contacted — as directed.",
+                "Nothing, unless the outcome was negative."
+              ],
+              answer: 1,
+              feedback: "Factual documentation, recorded as directed, helps the right people review the situation."
+            }
+          ]
+        }
+      ]
+    },
+
+    /* ───────────────────────────── MODULE 8 ───────────────────────────── */
+    {
+      id: 8, icon: "trophy", title: "Key Takeaways", short: "Finish",
+      minutes: 4, district: "Destination",
+      badge: { id: "destination", name: "Route Complete", icon: "trophy" },
+      screens: [
+        {
+          type: "takeaway", icon: "key",
+          title: "When a situation is unclear…",
+          narration: "Compliance is part of everyday work. When you encounter a situation that is unclear, take time to check the relevant guidance and use the appropriate channel to ask questions. Your organization’s policies and procedures will guide the next steps.",
+          steps: [
+            { icon: "pause",     title: "Pause",    text: "Stop before acting on an unclear request." },
+            { icon: "clipboard", title: "Check",    text: "Check the relevant policy or procedure." },
+            { icon: "fileText",  title: "Document", text: "Document as directed." },
+            { icon: "help",      title: "Ask",      text: "Ask for guidance through an appropriate channel." }
+          ]
+        },
+        {
+          type: "reflect", icon: "message",
+          title: "Commit to your route",
+          lead: "Think about your own role. Which situation on this route are you most likely to encounter, and who would you contact first? (Optional — your note is stored only on this device.)",
+          narration: "Take a moment to reflect. Which situation are you most likely to encounter in your role, and who would you contact first?",
+          points: 20
+        },
+        { type: "certificate", icon: "award", title: "Route complete!" }
+      ]
+    }
+  ]
+};
+
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════
+   Compliance Route 101 — course engine
+   Map pathway · module player · gamified interactions
+   Talks to the Java CourseServer (/api/*) when available and
+   falls back to localStorage when opened as a static file.
+   ══════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+  const C = window.COURSE;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const icon = (name, cls = "") => `<svg class="ic ${cls}"><use href="#i-${name}"/></svg>`;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const KEY = "complianceRoute101.v1";
+
+  /* ───────────────────────── state ───────────────────────── */
+  const blank = () => ({ name: "", learnerId: "", points: 0, done: [], badges: [], awarded: {}, bestScore: null, reflection: "", completedAt: null });
+  let S = load();
+  function load() {
+    try { return Object.assign(blank(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch { return blank(); }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(S)); } catch { /* storage unavailable */ }
+    Api.sync();
+  }
+
+  /* ───────────────────────── server API ───────────────────────── */
+  const Api = {
+    online: false,
+    async ping() {
+      if (location.protocol === "file:") return;
+      try { const r = await fetch("api/health", { cache: "no-store" }); this.online = r.ok && (await r.json()).status === "ok"; } catch { this.online = false; }
+    },
+    sync() {
+      if (!this.online || !S.learnerId) return;
+      const body = new URLSearchParams({
+        learnerId: S.learnerId, name: S.name, points: S.points, modules: S.done.length,
+        badges: S.badges.join(","), score: S.bestScore ?? "", completed: S.completedAt ? "true" : "false"
+      });
+      fetch("api/progress", { method: "POST", body }).catch(() => {});
+    },
+    async leaderboard() {
+      if (!this.online) return null;
+      try { const r = await fetch("api/leaderboard"); return r.ok ? r.json() : null; } catch { return null; }
+    },
+    async grade(answers) {
+      if (!this.online) return null;
+      try {
+        const r = await fetch("api/assessment", { method: "POST", body: new URLSearchParams({ learnerId: S.learnerId, answers: answers.join(",") }) });
+        return r.ok ? r.json() : null;
+      } catch { return null; }
+    }
+  };
+
+  /* ───────────────────────── gamification ───────────────────────── */
+  const levelFor = p => C.levels.filter(l => p >= l.min).pop().title;
+  function award(key, pts, el) {
+    if (S.awarded[key] || pts <= 0) return 0;
+    S.awarded[key] = pts; S.points += pts; save(); renderHud(true);
+    floatPts(`+${pts}`, el);
+    return pts;
+  }
+  function floatPts(text, el) {
+    const r = (el || $("#hudPoints")).getBoundingClientRect();
+    const f = document.createElement("div");
+    f.className = "pts-float"; f.textContent = text;
+    f.style.left = `${r.left + r.width / 2 - 20}px`; f.style.top = `${r.top}px`;
+    document.body.appendChild(f); setTimeout(() => f.remove(), 1200);
+  }
+  function toast(msg, ic = "star") {
+    const t = document.createElement("div");
+    t.className = "toast"; t.innerHTML = `${icon(ic)}<span>${msg}</span>`;
+    $("#toasts").appendChild(t); setTimeout(() => t.remove(), 3200);
+  }
+  function renderHud(bump) {
+    const prevLevel = $("#hudLevel").textContent;
+    $("#hudPoints").textContent = S.points;
+    $("#hudLevel").textContent = levelFor(S.points);
+    $("#hudBadges").textContent = S.badges.length;
+    const pct = Math.round(S.done.length / C.modules.length * 100);
+    $("#hudBar").style.width = pct + "%"; $("#hudPct").textContent = pct + "%";
+    if (bump) { const h = $("#hudPoints").parentElement; h.classList.remove("bump"); void h.offsetWidth; h.classList.add("bump"); }
+    if (bump && prevLevel !== $("#hudLevel").textContent) toast(`Level up! You are now a <b>${levelFor(S.points)}</b>`, "award");
+  }
+
+  /* confetti */
+  function confetti(n = 160) {
+    const cv = $("#confetti"), ctx = cv.getContext("2d");
+    cv.width = innerWidth; cv.height = innerHeight;
+    const cols = ["#0e7c86", "#14a3a8", "#e9a23b", "#0b2545", "#1f8a5b", "#ffffff"];
+    const ps = Array.from({ length: n }, () => ({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * .4, r: 4 + Math.random() * 6, c: cols[Math.random() * cols.length | 0], vy: 2 + Math.random() * 3, vx: -1.5 + Math.random() * 3, a: Math.random() * 6, va: -.2 + Math.random() * .4 }));
+    let t = 0;
+    (function frame() {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * .6); ctx.restore(); });
+      if (++t < 220) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })();
+  }
+
+  /* narration (Web Speech API) */
+  const Narr = {
+    playing: false, text: "",
+    set(text) { this.stop(); this.text = text || ""; $("#narrBtn").classList.toggle("hidden", !this.text || !("speechSynthesis" in window)); },
+    toggle() { this.playing ? this.stop() : this.play(); },
+    play() {
+      if (!this.text || !("speechSynthesis" in window)) return;
+      const u = new SpeechSynthesisUtterance(this.text); u.rate = 1; u.lang = "en-US";
+      u.onend = () => this.ui(false); speechSynthesis.speak(u); this.ui(true);
+    },
+    stop() { if ("speechSynthesis" in window) speechSynthesis.cancel(); this.ui(false); },
+    ui(on) { this.playing = on; const b = $("#narrBtn"); b.classList.toggle("playing", on); b.innerHTML = on ? `${icon("volumeX")}<span>Stop narration</span>` : `${icon("volume")}<span>Play narration</span>`; }
+  };
+
+  /* ───────────────────────── modal ───────────────────────── */
+  function modal(html, { dismiss = true } = {}) {
+    $("#modalCard").innerHTML = html; $("#modal").classList.remove("hidden");
+    $("#modal").onclick = e => { if (dismiss && e.target.id === "modal") closeModal(); };
+    $$("[data-close]", $("#modalCard")).forEach(b => b.onclick = closeModal);
+    const f = $("input,button", $("#modalCard")); f && f.focus();
+  }
+  const closeModal = () => { $("#modal").classList.add("hidden"); $("#modalCard").innerHTML = ""; };
+
+  // Name entry is an inline form on the map (more reliable than a pop-up on iPad / in embedded viewers)
+  function askName() {
+    const card = $("#nameCard"); card.classList.remove("hidden");
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.remove("nudge"); void card.offsetWidth; card.classList.add("nudge");
+    setTimeout(() => { try { $("#nameInline").focus(); } catch {} }, 350);
+  }
+  function initNameForm() {
+    $("#nameCard").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = $("#nameInline"), v = input.value.trim();
+      if (!v) { $("#nameErr").classList.remove("hidden"); input.focus(); return; }
+      S.name = v; S.learnerId = S.learnerId || ((window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2));
+      input.blur(); save(); renderMap();
+      toast(`Route assigned to <b>${esc(v)}</b>. Safe travels!`, "navigation");
+      setTimeout(() => openModule(1), 600);
+    });
+  }
+
+  /* ───────────────────────── MAP ───────────────────────── */
+  const isDone = id => S.done.includes(id);
+  const isUnlocked = id => id === 1 || isDone(id - 1);
+  const currentId = () => (C.modules.find(m => !isDone(m.id)) || {}).id || null;
+  let pathLen = 0, nodePts = [];
+
+  // Checkpoint waypoints (viewBox 1200×620). Low stops label below, high stops label above.
+  const WAYPOINTS = [[100, 500], [245, 330], [400, 480], [550, 290], [705, 460], [855, 270], [1005, 430], [1110, 200]];
+
+  function buildRoad(pts) {
+    // Catmull-Rom → cubic Bézier for a smooth road through every checkpoint
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2, k = 1 / 6;
+      d += ` C ${p1[0] + (p2[0] - p0[0]) * k} ${p1[1] + (p2[1] - p0[1]) * k}, ${p2[0] - (p3[0] - p1[0]) * k} ${p2[1] - (p3[1] - p1[1]) * k}, ${p2[0]} ${p2[1]}`;
+    }
+    return d;
+  }
+
+  function layoutNodes() {
+    const d = buildRoad(WAYPOINTS);
+    ["#roadBase", "#roadDash", "#roadDone"].forEach(s => $(s).setAttribute("d", d));
+    const road = $("#roadBase");
+    pathLen = road.getTotalLength();
+    // find the path length at each waypoint by sampling
+    const samples = [];
+    for (let l = 0; l <= pathLen; l += 2) { const p = road.getPointAtLength(l); samples.push([l, p.x, p.y]); }
+    nodePts = WAYPOINTS.map(([x, y], i) => {
+      let best = samples[0], bd = Infinity;
+      samples.forEach(s => { const dd = (s[1] - x) ** 2 + (s[2] - y) ** 2; if (dd < bd) { bd = dd; best = s; } });
+      return { x, y, len: i === WAYPOINTS.length - 1 ? pathLen : i === 0 ? 0 : best[0], below: i % 2 === 0 };
+    });
+    const done = $("#roadDone");
+    done.style.strokeDasharray = pathLen; done.style.strokeDashoffset = pathLen;
+  }
+
+  function renderMap(prevDone) {
+    $("#learnerName").textContent = S.name || "Navigator";
+    $("#nameCard").classList.toggle("hidden", !!S.name);
+    const g = $("#nodes"); g.innerHTML = "";
+    const cur = currentId();
+    C.modules.forEach((m, i) => {
+      const p = nodePts[i];
+      const st = isDone(m.id) ? "done" : m.id === cur ? "current" : isUnlocked(m.id) ? "unlocked" : "locked";
+      const ly = p.below ? 40 : -78;
+      const w = Math.max(m.title.length * 6.6, m.district.length * 5.8) + 26;
+      const node = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      node.setAttribute("class", `node ${st}`);
+      node.setAttribute("transform", `translate(${p.x} ${p.y})`);
+      node.setAttribute("tabindex", st === "locked" ? "-1" : "0");
+      node.setAttribute("role", "button");
+      node.setAttribute("aria-label", `Checkpoint ${m.id}: ${m.title} — ${st}`);
+      node.innerHTML = `
+        <circle class="pulse" r="30"/>
+        <circle class="disc" r="28"/>
+        <use href="#i-${st === "locked" ? "lock" : m.icon}" x="-13" y="-13" width="26" height="26" class="ic ic-node" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"/>
+        <circle class="num-bg" cx="21" cy="-21" r="11"/>
+        <text class="num" x="21" y="-17" text-anchor="middle">${st === "done" ? "✓" : m.id}</text>
+        <g class="label-g">
+          <rect class="label-bg" x="${-w / 2}" y="${ly}" width="${w}" height="38" rx="10"/>
+          <text class="label" x="0" y="${ly + 16}" text-anchor="middle">${esc(m.title)}</text>
+          <text class="sublabel" x="0" y="${ly + 30}" text-anchor="middle">${esc(m.district)} · ${m.minutes} min</text>
+        </g>`;
+      const open = () => st === "locked" ? toast(`Complete checkpoint ${m.id - 1} to unlock this stretch of road.`, "lock") : openModule(m.id);
+      node.addEventListener("click", open);
+      node.addEventListener("keydown", e => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), open()));
+      g.appendChild(node);
+    });
+
+    // road progress + marker
+    const doneCount = S.done.length;
+    const targetIdx = Math.min(doneCount, C.modules.length - 1);
+    const fromIdx = prevDone != null ? Math.min(prevDone, C.modules.length - 1) : targetIdx;
+    const road = $("#roadDone");
+    const setRoad = idx => road.style.strokeDashoffset = pathLen - nodePts[idx].len;
+    if (prevDone != null && fromIdx !== targetIdx) {
+      setRoad(fromIdx);
+      placeMarker(fromIdx);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        setRoad(targetIdx);
+        animateMarker(fromIdx, targetIdx);
+        const nn = $$("#nodes .node")[targetIdx];
+        if (nn) setTimeout(() => { nn.classList.add("unlocking"); toast(`New stretch unlocked: <b>${esc(C.modules[targetIdx].title)}</b>`, "key"); }, 1500);
+      }));
+    } else {
+      setRoad(targetIdx);
+      placeMarker(targetIdx);
+    }
+
+    // cards
+    $("#moduleList").innerHTML = C.modules.map(m => {
+      const st = isDone(m.id) ? "done" : isUnlocked(m.id) ? "open" : "locked";
+      const chip = st === "done" ? `<span class="chip ok">${icon("check")} Complete</span>` : st === "open" ? `<span class="chip go">${icon("navigation")} Ready</span>` : `<span class="chip">${icon("lock")} Locked</span>`;
+      return `<button class="mcard ${st}" data-mod="${m.id}" ${st === "locked" ? "disabled" : ""}>
+        <span class="mi">${icon(st === "locked" ? "lock" : m.icon)}</span>
+        <span><span class="eyebrow">Checkpoint ${m.id} · ${esc(m.district)}</span><h3>${esc(m.title)}</h3>
+        <span class="meta">${icon("clock")} ${m.minutes} min ${chip}</span></span></button>`;
+    }).join("");
+    $$(".mcard").forEach(b => b.onclick = () => openModule(+b.dataset.mod));
+
+    const cb = $("#continueBtn");
+    if (!cur) cb.innerHTML = `${icon("award")}<span>View certificate</span>`;
+    else cb.innerHTML = `${icon("navigation")}<span>${S.done.length ? `Continue: Checkpoint ${cur}` : "Start the route"}</span>`;
+    cb.onclick = () => cur ? openModule(cur) : openModule(8, C.modules[7].screens.length - 1);
+    renderHud();
+  }
+
+  // the traveller marker sits on the road just before the checkpoint it is heading to
+  const markerLen = i => Math.max(0, nodePts[i].len - 52);
+  function placeMarker(i) {
+    const p = i === 0 ? { x: nodePts[0].x - 48, y: nodePts[0].y } : $("#roadBase").getPointAtLength(markerLen(i));
+    $("#marker").setAttribute("transform", `translate(${p.x} ${p.y})`);
+  }
+  function animateMarker(fromIdx, toIdx) {
+    const fromLen = markerLen(fromIdx), toLen = markerLen(toIdx);
+    const road = $("#roadBase"), marker = $("#marker"), dur = 1600, t0 = performance.now();
+    const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    (function step(now) {
+      const t = Math.min(1, (now - t0) / dur);
+      const p = road.getPointAtLength(fromLen + (toLen - fromLen) * ease(t));
+      marker.setAttribute("transform", `translate(${p.x} ${p.y})`);
+      if (t < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  /* ───────────────────────── PLAYER ───────────────────────── */
+  let mod = null, idx = 0, gate = false, cleanup = null;
+
+  function openModule(id, startAt = 0) {
+    if (!isUnlocked(id)) return;
+    if (!S.name) return askName();
+    mod = C.modules.find(m => m.id === id); idx = startAt;
+    $("#mapView").classList.add("hidden"); $("#playerView").classList.remove("hidden");
+    $("#sideIcon").setAttribute("href", `#i-${mod.icon}`);
+    $("#sideEyebrow").textContent = `Checkpoint ${mod.id} of ${C.modules.length}`;
+    $("#sideTitle").textContent = mod.title;
+    $("#sideMeta").innerHTML = `${icon("mapPin")} ${esc(mod.district)} · ${icon("clock")} ${mod.minutes} min`;
+    scrollTo({ top: 0, behavior: "smooth" });
+    renderScreen();
+  }
+
+  function backToMap(prevDone) {
+    Narr.stop(); cleanup && cleanup(); cleanup = null;
+    $("#playerView").classList.add("hidden"); $("#mapView").classList.remove("hidden");
+    renderMap(prevDone); scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function setGate(locked, hint = "") {
+    gate = locked; $("#nextBtn").disabled = locked;
+    $("#navHint").textContent = locked ? hint : "";
+  }
+  const unlockNext = () => setGate(false);
+
+  function renderScreen() {
+    cleanup && cleanup(); cleanup = null;
+    const sc = mod.screens[idx];
+    $("#screenSteps").innerHTML = mod.screens.map((s, i) => `<li class="${i === idx ? "active" : i < idx ? "done" : ""}"><span class="dot">${i < idx ? "✓" : i + 1}</span>${esc(s.title)}</li>`).join("");
+    $("#screenBar").style.width = `${(idx + 1) / mod.screens.length * 100}%`;
+    $("#prevBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+    const last = idx === mod.screens.length - 1;
+    $("#nextBtn").innerHTML = last ? `${icon("flag")} Complete checkpoint` : `Continue ${icon("arrowRight")}`;
+    if (sc.type === "certificate") $("#nextBtn").innerHTML = `${icon("map")} Return to map`;
+    const el = $("#screen"); el.style.animation = "none"; void el.offsetWidth; el.style.animation = "";
+    Narr.set(sc.narration);
+    setGate(false);
+    (R[sc.type] || R.intro)(el, sc);
+  }
+
+  function next() {
+    if (gate) return;
+    Narr.stop();
+    if (idx < mod.screens.length - 1) { idx++; renderScreen(); scrollTo({ top: 0, behavior: "smooth" }); return; }
+    completeModule();
+  }
+
+  function completeModule() {
+    const wasDone = isDone(mod.id);
+    const prev = S.done.length;
+    if (!wasDone) {
+      S.done.push(mod.id);
+      award(`mod-${mod.id}`, 50);
+      if (!S.badges.includes(mod.badge.id)) S.badges.push(mod.badge.id);
+      if (mod.id === C.modules.length) S.completedAt = new Date().toISOString();
+      save();
+      confetti(mod.id === C.modules.length ? 260 : 120);
+      const nxt = C.modules[mod.id];
+      modal(`<div class="badge-pop">
+        <div class="big-badge">${icon(mod.badge.icon)}</div>
+        <p class="eyebrow" style="justify-content:center">Badge earned · Checkpoint ${mod.id} complete</p>
+        <h2 style="justify-content:center">${esc(mod.badge.name)}</h2>
+        <p class="muted">+50 checkpoint bonus · ${S.points} total route points</p>
+        ${nxt ? `<p>Next stop: <b>${esc(nxt.title)}</b> in ${esc(nxt.district)}.</p>` : "<p>You’ve reached your destination!</p>"}
+        <div class="modal-actions" style="justify-content:center"><button class="btn btn-primary" id="toMap">${icon("map")} View my route</button></div></div>`, { dismiss: false });
+      $("#toMap").onclick = () => { closeModal(); backToMap(prev); };
+    } else backToMap();
+  }
+
+  /* ───────────────────────── SCREEN RENDERERS ───────────────────────── */
+  const head = (sc, eyebrow) => `<div class="s-head"><div class="s-icon">${icon(sc.icon || mod.icon)}</div><div><p class="eyebrow">${esc(eyebrow || `Checkpoint ${mod.id} · Screen ${idx + 1}`)}</p><h2>${esc(sc.title)}</h2></div></div>`;
+  const heroRoute = `<svg class="hero-route" viewBox="0 0 300 160"><path d="M10 150 C 80 150 60 70 140 70 S 220 140 290 10"/></svg>`;
+  const feedbackBox = (kind, html) => `<div class="feedback ${kind}">${icon(kind === "good" ? "check" : kind === "mid" ? "alert" : "x")}<div>${html}</div></div>`;
+
+  const R = {
+    intro(el, sc) {
+      const isWelcome = mod.id === 1 && idx === 0;
+      el.innerHTML = isWelcome
+        ? `<div class="hero">${heroRoute}<p class="eyebrow">${icon("map")} ${C.duration} · Self-paced</p><h2>${esc(sc.title)}</h2><p><b>${esc(sc.subtitle)}</b></p><p>${esc(sc.body)}</p></div>
+           <div class="grid-2">${C.modules.slice(1).map(m => `<div class="tile"><span class="ti">${icon(m.icon)}</span><div><h3>${esc(m.title)}</h3><p>${m.minutes} minutes · ${esc(m.district)}</p></div></div>`).join("")}</div>`
+        : `${head(sc)}<p class="s-body">${esc(sc.body)}</p>${sc.bullets ? `<div class="bullets">${sc.bullets.map((b, i) => `<div class="b" style="animation-delay:${i * .12}s">${icon(b.icon)}<span>${esc(b.text)}</span></div>`).join("")}</div>` : ""}`;
+    },
+
+    objectives(el, sc) { R.revealTiles(el, sc, "Reveal all four signposts to continue"); },
+    channels(el, sc) { R.revealTiles(el, sc, "Explore every item to continue"); },
+    revealTiles(el, sc, hint) {
+      el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p><div class="grid-2">${sc.items.map((it, i) => `
+        <button class="tile reveal" data-i="${i}"><span class="ti">${icon(it.icon)}</span><div><h3>${esc(it.title)}</h3><p class="txt"><span class="hide">Select to reveal</span></p></div>${icon("check", "tick")}</button>`).join("")}</div>`;
+      const seen = new Set();
+      setGate(true, hint);
+      $$(".reveal", el).forEach(b => b.onclick = () => {
+        const i = +b.dataset.i; b.classList.add("open"); $(".txt", b).textContent = sc.items[i].text;
+        if (!seen.has(i)) { seen.add(i); award(`${mod.id}-${idx}-${i}`, sc.points || 5, b); }
+        if (seen.size === sc.items.length) { unlockNext(); toast("All explored — continue down the road!", "check"); }
+      });
+    },
+
+    howto(el, sc) {
+      el.innerHTML = `${head(sc)}<p class="s-body">Here’s how your journey works. Every action on the route counts toward your navigator level.</p>
+        <div class="grid-2">${sc.items.map((it, i) => `<div class="tile" style="animation:rise .5s ${i * .1}s both"><span class="ti">${icon(it.icon)}</span><div><h3>${esc(it.title)}</h3><p>${esc(it.text)}</p></div></div>`).join("")}</div>
+        <div class="bullets">${C.levels.map((l, i) => `<div class="b" style="animation-delay:${.3 + i * .08}s">${icon("award")}<span><b>${esc(l.title)}</b> — ${l.min}+ route points</span></div>`).join("")}</div>`;
+    },
+
+    pillars(el, sc) {
+      el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p>
+        <div class="flips">${sc.cards.map((c, i) => `<button class="flip" data-i="${i}" aria-label="${esc(c.title)}"><div class="flip-in">
+          <div class="flip-face flip-front">${icon(c.icon)}<h3>${esc(c.title)}</h3><small>Tap to flip</small></div>
+          <div class="flip-face flip-back"><b>${esc(c.title)}</b><span>${esc(c.back)}</span></div></div></button>`).join("")}</div>`;
+      const seen = new Set(); setGate(true, "Flip all four cards to continue");
+      $$(".flip", el).forEach(b => b.onclick = () => {
+        b.classList.toggle("open"); const i = +b.dataset.i;
+        if (!seen.has(i)) { seen.add(i); award(`${mod.id}-${idx}-${i}`, sc.points, b); }
+        if (seen.size === sc.cards.length) unlockNext();
+      });
+    },
+
+    match(el, sc) {
+      const defs = shuffle(sc.pairs.map((p, i) => ({ ...p, i })));
+      el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p>
+        <div class="match"><div class="match-col">${sc.pairs.map((p, i) => `<button class="mt term" data-i="${i}">${icon(p.icon)}<b>${esc(p.term)}</b></button>`).join("")}</div>
+        <div class="match-col">${defs.map(d => `<button class="mt sign def" data-i="${d.i}">${icon("signpost")}<span>${esc(d.def)}</span></button>`).join("")}</div></div>
+        <div id="mfb"></div>`;
+      let sel = null, matched = 0, misses = 0; setGate(true, "Match all four pairs to continue");
+      $$(".term", el).forEach(t => t.onclick = () => { if (t.classList.contains("matched")) return; $$(".term", el).forEach(x => x.classList.remove("sel")); t.classList.add("sel"); sel = +t.dataset.i; });
+      $$(".def", el).forEach(d => d.onclick = () => {
+        if (sel == null || d.classList.contains("matched")) return;
+        const t = $(`.term[data-i="${sel}"]`, el);
+        if (+d.dataset.i === sel) {
+          t.classList.remove("sel"); t.classList.add("matched"); d.classList.add("matched"); matched++; sel = null;
+          if (matched === sc.pairs.length) {
+            const pts = Math.max(5, sc.points * sc.pairs.length - misses * 10);
+            award(`${mod.id}-${idx}`, pts, d); unlockNext();
+            $("#mfb", el).innerHTML = feedbackBox("good", `<p><b>All signs matched${misses ? "" : " — perfect run"}!</b> Policies set the expectation, procedures show the way, guidance helps when it’s unclear and accountability keeps everyone on course.</p>`);
+          }
+        } else { misses++; [d, t].forEach(x => { x.classList.remove("nope"); void x.offsetWidth; x.classList.add("nope"); }); }
+      });
+    },
+
+    sort(el, sc) {
+      const items = shuffle(sc.items.map((it, i) => ({ ...it, i })));
+      el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p>
+        <div class="sort-pool" id="pool">${items.map(it => `<button class="chipcard" draggable="true" data-i="${it.i}">${esc(it.text)}</button>`).join("")}</div>
+        <div class="bins">${sc.bins.map(b => `<div class="bin" data-bin="${b.id}" tabindex="0" role="button" aria-label="Place in ${esc(b.label)}"><div class="bin-h">${icon(b.icon)}${esc(b.label)}</div></div>`).join("")}</div><div id="sfb"></div>`;
+      let sel = null, placed = 0, misses = 0; setGate(true, "Sort every responsibility to continue");
+      const place = (i, binEl) => {
+        const it = sc.items[i], chip = $(`.chipcard[data-i="${i}"]`, el);
+        if (!chip || chip.classList.contains("placed-ok")) return;
+        if (it.bin === binEl.dataset.bin) {
+          chip.classList.remove("sel"); chip.classList.add("placed-ok"); chip.draggable = false; binEl.appendChild(chip); placed++; sel = null;
+          if (placed === sc.items.length) {
+            award(`${mod.id}-${idx}`, Math.max(20, sc.points * 4 - misses * 10), binEl); unlockNext();
+            $("#sfb", el).innerHTML = feedbackBox("good", `<p><b>Every stop has an owner.</b> ${misses ? `${misses} wrong turn(s) along the way — ` : "Flawless! "}Compliance works best when each role does its part.</p>`);
+          }
+        } else { misses++; binEl.classList.remove("nope"); void binEl.offsetWidth; binEl.classList.add("nope"); toast("Not quite — think about who owns that responsibility.", "alert"); }
+      };
+      $$(".chipcard", el).forEach(c => {
+        c.onclick = () => { if (c.classList.contains("placed-ok")) return; $$(".chipcard", el).forEach(x => x.classList.remove("sel")); c.classList.add("sel"); sel = +c.dataset.i; $$(".bin", el).forEach(b => b.classList.add("target")); };
+        c.ondragstart = e => { e.dataTransfer.setData("text/plain", c.dataset.i); c.classList.add("dragging"); };
+        c.ondragend = () => c.classList.remove("dragging");
+      });
+      $$(".bin", el).forEach(b => {
+        const drop = () => { if (sel != null) { place(sel, b); $$(".bin", el).forEach(x => x.classList.remove("target")); } };
+        b.onclick = e => { if (e.target.closest(".chipcard")) return; drop(); };
+        b.onkeydown = e => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), drop());
+        b.ondragover = e => { e.preventDefault(); b.classList.add("over"); };
+        b.ondragleave = () => b.classList.remove("over");
+        b.ondrop = e => { e.preventDefault(); b.classList.remove("over"); place(+e.dataTransfer.getData("text/plain"), b); };
+      });
+    },
+
+    choice(el, sc) {
+      const keys = "ABCD";
+      el.innerHTML = `${head(sc, sc.badgeLabel)}
+        <div class="scene"><span class="si">${icon(sc.scenario.icon)}</span><div><span class="lbl">${esc(sc.scenario.label)}</span><p>${esc(sc.scenario.text)}</p></div></div>
+        <p class="q">${esc(sc.question)}</p>
+        <div class="options ${sc.tf ? "tf-opts" : ""}">${sc.options.map((o, i) => `<button class="opt" data-i="${i}">${sc.tf ? "" : `<span class="key">${keys[i]}</span>`}<span>${esc(o.text)}</span></button>`).join("")}</div><div id="cfb"></div>`;
+      let tries = 0; setGate(true, "Choose the best answer to continue");
+      $$(".opt", el).forEach(b => b.onclick = () => {
+        const o = sc.options[+b.dataset.i]; tries++;
+        if (o.correct) {
+          b.classList.add("correct"); $$(".opt", el).forEach(x => x.disabled = true);
+          const pts = tries === 1 ? sc.points : Math.round(sc.points / 3);
+          award(`${mod.id}-${idx}`, pts, b);
+          $("#cfb", el).innerHTML = feedbackBox("good", `<p><b>${tries === 1 ? "Right on route!" : "You found the route."}</b> ${esc(sc.feedback.correct)}</p>`);
+          unlockNext();
+        } else {
+          b.classList.add("wrong"); b.disabled = true;
+          $("#cfb", el).innerHTML = feedbackBox("bad", `<p><b>Wrong turn.</b> ${esc(sc.feedback.incorrect)} Try again.</p>`);
+        }
+      });
+    },
+
+    redflags(el, sc) {
+      const items = shuffle(sc.items.map((it, i) => ({ ...it, i })));
+      const C2 = 2 * Math.PI * 18;
+      el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p>
+        <div class="radar-bar"><div class="timer" id="tmr"><svg class="ring" viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="18"/><circle class="fg" cx="22" cy="22" r="18" stroke-dasharray="${C2}" stroke-dashoffset="0"/></svg><span id="tsec">${sc.seconds}s</span></div>
+        <span class="chip" id="tagCount">${icon("flag")} 0 tagged</span>
+        <button class="btn btn-primary btn-sm" id="rfSubmit">${icon("search")} Submit radar scan</button></div>
+        <div class="inbox">${items.map(it => `<button class="mailrow" data-i="${it.i}" aria-pressed="false"><span class="mi">${icon(it.icon)}</span><span class="txt">${esc(it.text)}</span><span class="flagbox">${icon("flag")}</span></button>`).join("")}</div><div id="rfb"></div>`;
+      setGate(true, "Submit your radar scan to continue");
+      let left = sc.seconds, finished = false;
+      const tagged = new Set();
+      const fg = $(".fg", el);
+      const iv = setInterval(() => {
+        left--; $("#tsec", el).textContent = `${Math.max(0, left)}s`;
+        fg.style.strokeDashoffset = C2 * (1 - left / sc.seconds);
+        $("#tmr", el).classList.toggle("low", left <= 10);
+        if (left <= 0) finish(true);
+      }, 1000);
+      cleanup = () => clearInterval(iv);
+      $$(".mailrow", el).forEach(r => r.onclick = () => {
+        if (finished) return; const i = +r.dataset.i;
+        tagged.has(i) ? tagged.delete(i) : tagged.add(i);
+        r.classList.toggle("tagged"); r.setAttribute("aria-pressed", tagged.has(i));
+        $("#tagCount", el).innerHTML = `${icon("flag")} ${tagged.size} tagged`;
+      });
+      $("#rfSubmit", el).onclick = () => finish(false);
+      function finish(timeout) {
+        if (finished) return; finished = true; clearInterval(iv);
+        let hits = 0, misses = 0, falses = 0;
+        $$(".mailrow", el).forEach(r => {
+          const it = sc.items[+r.dataset.i], t = tagged.has(+r.dataset.i);
+          r.disabled = true;
+          let res;
+          if (it.flag && t) { hits++; r.classList.add("res-ok"); res = `<span class="res" style="color:var(--green)">Red flag spotted</span>`; }
+          else if (it.flag && !t) { misses++; r.classList.add("res-miss"); res = `<span class="res" style="color:#9a5f05">Missed red flag</span>`; }
+          else if (!it.flag && t) { falses++; r.classList.add("res-false"); res = `<span class="res" style="color:var(--red)">Routine — not a flag</span>`; }
+          else res = `<span class="res" style="color:var(--muted)">Routine</span>`;
+          $(".txt", r).innerHTML = `${esc(it.text)}<span class="why">${res} · ${esc(it.why)}</span>`;
+        });
+        const total = sc.items.filter(x => x.flag).length;
+        const speed = timeout ? 0 : Math.round(left / 2);
+        const pts = Math.max(0, hits * 25 - falses * 10 + speed);
+        award(`${mod.id}-${idx}`, pts, $("#rfSubmit", el));
+        const kind = hits === total && !falses ? "good" : hits >= total - 1 ? "mid" : "bad";
+        $("#rfb", el).innerHTML = feedbackBox(kind, `<p><b>Radar result: ${hits}/${total} red flags spotted${falses ? `, ${falses} false alarm(s)` : ""}.</b> ${timeout ? "Time ran out — " : `Speed bonus +${speed}. `}Remember: pressure to rush, missing documentation, bypassed reviews and secrecy are all reasons to pause and check.</p><div class="pill-row"><span class="chip ok">+${pts} route points</span></div>`);
+        if (hits === total && !falses) toast("Eagle eyes! Perfect radar scan.", "eye");
+        unlockNext(); $("#rfSubmit", el).disabled = true;
+      }
+    },
+
+    branch(el, sc) {
+      const steps = ["s1", "s2", "s3"], labels = ["Pause", "Check", "Document"];
+      let node = sc.start, earned = 0, perfect = true;
+      setGate(true, "Work through the scenario to continue");
+      const draw = () => {
+        const n = sc.nodes[node], si = steps.indexOf(node);
+        el.innerHTML = `${head(sc, "Scenario-based decision practice")}
+          <div class="branch-track">${steps.map((s, i) => `${i ? '<span class="bt-sep"></span>' : ""}<span class="bt-step ${i < si ? "done" : i === si ? "on" : ""}">${icon(i < si ? "check" : ["pause", "clipboard", "fileText"][i])} ${labels[i]}</span>`).join("")}</div>
+          <div class="scene"><span class="si">${icon(n.scene.icon)}</span><div><span class="lbl">Decision point ${si + 1} of 3</span><p>${esc(n.context)}</p><div class="bubble">${esc(n.scene.who)}: “${esc(n.scene.quote)}”</div></div></div>
+          <p class="q">${esc(n.question)}</p>
+          <div class="options">${n.options.map((o, i) => `<button class="opt" data-i="${i}"><span class="key">${icon(["signpost", "split", "navigation"][i])}</span><span>${esc(o.text)}</span></button>`).join("")}</div><div id="bfb"></div>`;
+        $$(".opt", el).forEach(b => b.onclick = () => {
+          const o = n.options[+b.dataset.i];
+          $$(".opt", el).forEach(x => x.disabled = true);
+          b.classList.add(o.quality === "best" ? "correct" : o.quality === "ok" ? "ok" : "wrong");
+          if (o.quality !== "best") perfect = false;
+          const key = `${mod.id}-${idx}-${node}`;
+          const got = award(key, o.points, b); earned += got;
+          const target = sc.nodes[o.next];
+          const isRetry = target && target.retry;
+          const kind = o.quality === "best" ? "good" : o.quality === "ok" ? "mid" : "bad";
+          const title = o.quality === "best" ? "Best response." : o.quality === "ok" ? "Acceptable route." : "Detour ahead.";
+          const extra = node === "s1" && o.quality === "best" ? `<div class="pill-row">${["pause", "clipboard", "fileText", "help"].map((ic, i) => `<span class="chip ok">${icon(ic)} ${["Pause", "Check", "Document", "Seek guidance"][i]}</span>`).join("")}</div>` : "";
+          $("#bfb", el).innerHTML = feedbackBox(kind, `<p><b>${title}</b> ${esc(o.feedback)}</p>${extra}
+            <div style="margin-top:12px"><button class="btn ${isRetry ? "btn-ghost" : "btn-primary"} btn-sm" id="bNext">${isRetry ? `${icon("refresh")} Try that decision again` : o.next === "end" ? `${icon("flag")} See scenario results` : `${icon("arrowRight")} Continue the scenario`}</button></div>`);
+          $("#bNext", el).onclick = () => { node = isRetry ? target.retry : o.next; node === "end" ? end() : draw(); };
+        });
+      };
+      const end = () => {
+        el.innerHTML = `${head(sc, "Scenario complete")}
+          <div class="result"><div class="stars">${[0, 1, 2].map(i => icon("star", (perfect || i < 2) ? "on" : "")).join("")}</div>
+          <h2>${perfect ? "Flawless navigation!" : "Scenario complete"}</h2>
+          <p class="muted">You paused, checked the procedure and documented the facts — the approved route for unclear requests.</p>
+          <div class="stat-row"><div class="stat"><b>+${earned}</b>route points</div><div class="stat"><b>${perfect ? "3/3" : "Retried"}</b>best decisions</div></div></div>
+          ${feedbackBox("good", "<p>Follow PRCI’s approved policies and reporting channels, and document the concern as directed.</p>")}`;
+        if (perfect) award(`${mod.id}-${idx}-perfect`, 30);
+        unlockNext();
+      };
+      draw();
+    },
+
+    order(el, sc) {
+      let order = shuffle(sc.items.map((_, i) => i));
+      while (order.every((v, i) => v === i)) order = shuffle(order);
+      let moves = 0, solved = false; setGate(true, "Put the steps in order to continue");
+      const draw = () => {
+        el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p>
+          <div class="order-list ${solved ? "solved" : ""}">${order.map((it, pos) => { const s = sc.items[it]; return `
+            <div class="ord" draggable="${!solved}" data-pos="${pos}"><span class="grip">${icon("grip")}</span><span class="n">${pos + 1}</span>${icon(s.icon, "oi")}<div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>
+            ${solved ? "" : `<span class="arrows"><button data-mv="-1" aria-label="Move up" ${pos === 0 ? "disabled" : ""}>${icon("up")}</button><button data-mv="1" aria-label="Move down" ${pos === order.length - 1 ? "disabled" : ""}>${icon("down")}</button></span>`}</div>`; }).join("")}</div>
+          <div style="margin-top:14px">${solved ? "" : `<button class="btn btn-primary" id="chk">${icon("check")} Check my route</button>`}</div><div id="ofb"></div>`;
+        if (solved) {
+          $("#ofb", el).innerHTML = feedbackBox("good", "<p><b>Route plotted!</b> Pause → Check → Document → Ask for guidance. Keep this sequence handy for any unclear situation.</p>");
+          return;
+        }
+        $$(".ord", el).forEach(r => {
+          const pos = +r.dataset.pos;
+          $$("[data-mv]", r).forEach(b => b.onclick = () => { const t = pos + +b.dataset.mv; [order[pos], order[t]] = [order[t], order[pos]]; moves++; draw(); });
+          r.ondragstart = e => { e.dataTransfer.setData("text/plain", pos); r.classList.add("dragging"); };
+          r.ondragend = () => r.classList.remove("dragging");
+          r.ondragover = e => { e.preventDefault(); r.classList.add("over"); };
+          r.ondragleave = () => r.classList.remove("over");
+          r.ondrop = e => { e.preventDefault(); const from = +e.dataTransfer.getData("text/plain"); const [m] = order.splice(from, 1); order.splice(pos, 0, m); moves++; draw(); };
+        });
+        $("#chk", el).onclick = () => {
+          if (order.every((v, i) => v === i)) { solved = true; draw(); award(`${mod.id}-${idx}`, Math.max(10, sc.points - Math.max(0, moves - 4) * 2), $("#ofb", el)); unlockNext(); }
+          else { const ok = order.filter((v, i) => v === i).length; $("#ofb", el).innerHTML = feedbackBox("bad", `<p><b>${ok} of ${order.length} steps in place.</b> Think: what do you do before acting? What comes before asking?</p>`); }
+        };
+      };
+      draw();
+    },
+
+    mythfact(el, sc) {
+      let i = 0, right = 0; setGate(true, "Finish the speed round to continue");
+      const draw = () => {
+        if (i >= sc.statements.length) {
+          award(`${mod.id}-${idx}`, right * sc.points + (right === sc.statements.length ? 20 : 0));
+          el.innerHTML = `${head(sc)}<div class="result"><div class="stars">${[0, 1, 2].map(k => icon("star", right >= [1, 3, 4][k] ? "on" : "")).join("")}</div><h2>${right}/${sc.statements.length} correct</h2><p class="muted">${right === sc.statements.length ? "Perfect speed round! +20 bonus." : "Good effort — review the explanations and keep going."}</p></div>`;
+          return unlockNext();
+        }
+        const s = sc.statements[i];
+        el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p>
+          <div class="mf-card">“${esc(s.text)}”</div><p class="mf-count">Statement ${i + 1} of ${sc.statements.length}</p>
+          <div class="mf-btns"><button class="opt" data-v="0">${icon("x")} Myth</button><button class="opt" data-v="1">${icon("check")} Fact</button></div><div id="mffb"></div>`;
+        $$(".mf-btns .opt", el).forEach(b => b.onclick = () => {
+          const ans = b.dataset.v === "1", ok = ans === s.fact; if (ok) right++;
+          $$(".mf-btns .opt", el).forEach(x => x.disabled = true); b.classList.add(ok ? "correct" : "wrong");
+          $("#mffb", el).innerHTML = feedbackBox(ok ? "good" : "bad", `<p><b>${s.fact ? "Fact." : "Myth."}</b> ${esc(s.why || "That’s an accurate statement about speaking up.")}</p><div style="margin-top:10px"><button class="btn btn-primary btn-sm" id="mfn">${icon("arrowRight")} Next</button></div>`);
+          $("#mfn", el).onclick = () => { i++; draw(); };
+        });
+      };
+      draw();
+    },
+
+    quiz(el, sc) {
+      const startScreen = () => {
+        el.innerHTML = `${head(sc)}<div class="hero">${heroRoute}<p class="eyebrow">${icon("target")} Final assessment</p><h2>Ready for the summit?</h2><p>${esc(sc.lead)}</p></div>
+          <div class="grid-2">
+            <div class="tile"><span class="ti">${icon("fuel")}</span><div><h3>${sc.fuel} fuel tanks</h3><p>Each wrong turn burns one tank.</p></div></div>
+            <div class="tile"><span class="ti">${icon("clock")}</span><div><h3>${sc.seconds}s per checkpoint</h3><p>Answer faster for a time bonus.</p></div></div>
+            <div class="tile"><span class="ti">${icon("flame")}</span><div><h3>Streak multiplier</h3><p>Consecutive correct answers boost points up to ×3.</p></div></div>
+            <div class="tile"><span class="ti">${icon("award")}</span><div><h3>Pass at ${Math.round(C.passMark * 100)}%</h3><p>Retry as often as you need.</p></div></div>
+          </div>${S.bestScore != null ? `<p class="muted" style="margin-top:14px">${icon("trophy")} Your best score so far: <b>${S.bestScore}%</b></p>` : ""}
+          <div style="margin-top:18px"><button class="btn btn-gold" id="qStart">${icon("zap")} Start the Final Route Challenge</button></div>`;
+        $("#qStart", el).onclick = run;
+      };
+      setGate(!(S.bestScore >= C.passMark * 100), "Pass the challenge to continue");
+      startScreen();
+
+      function run() {
+        const qs = sc.questions.map((q, i) => ({ ...q, i }));
+        let qi = 0, fuel = sc.fuel, streak = 0, best = 0, score = 0, correct = 0, iv = null;
+        const results = [], answers = [];
+        const draw = () => {
+          const q = qs[qi]; let left = sc.seconds;
+          const order = shuffle(q.options.map((_, i) => i));
+          el.innerHTML = `${head(sc, `Checkpoint question ${qi + 1} of ${qs.length}`)}
+            <div class="quiz-hud">
+              <span class="qh"><span class="fuel-tanks">${Array.from({ length: sc.fuel }, (_, k) => icon("fuel", k < fuel ? "" : "empty")).join("")}</span> Fuel</span>
+              <span class="q-track">${qs.map((_, k) => `<span class="${results[k] === true ? "ok" : results[k] === false ? "no" : k === qi ? "cur" : ""}"></span>`).join("")}</span>
+              <span class="qh streak ${streak > 1 ? "hot" : ""}">${icon("flame")} Streak ×${Math.min(3, 1 + streak * .5).toFixed(1)}</span>
+              <span class="qh">${icon("star")} ${score}</span>
+              <span class="qh" id="qt">${icon("clock")} ${left}s</span>
+            </div>
+            <div class="tbar"><i id="tb" style="width:100%"></i></div>
+            <p class="q">${esc(q.q)}</p>
+            <div class="options ${q.options.length === 2 ? "tf-opts" : ""}">${order.map((oi, k) => `<button class="opt" data-o="${oi}">${q.options.length === 2 ? "" : `<span class="key">${"ABC"[k]}</span>`}<span>${esc(q.options[oi])}</span></button>`).join("")}</div><div id="qfb"></div>`;
+          iv = setInterval(() => {
+            left--; $("#qt", el).innerHTML = `${icon("clock")} ${Math.max(0, left)}s`;
+            $("#tb", el).style.width = `${left / sc.seconds * 100}%`; $(".tbar", el).classList.toggle("low", left <= 8);
+            if (left <= 0) answer(-1);
+          }, 1000);
+          cleanup = () => clearInterval(iv);
+          const answer = o => {
+            clearInterval(iv);
+            $$(".opt", el).forEach(x => { x.disabled = true; if (+x.dataset.o === q.answer) x.classList.add("correct"); });
+            answers[q.i] = o;
+            const ok = o === q.answer; results[qi] = ok;
+            let gained = 0;
+            if (ok) {
+              const mult = Math.min(3, 1 + streak * .5); streak++; best = Math.max(best, streak); correct++;
+              gained = Math.round((sc.base + left * 2) * mult); score += gained;
+            } else {
+              streak = 0; fuel = Math.max(0, fuel - 1);
+              const b = $(`.opt[data-o="${o}"]`, el); b && b.classList.add("wrong");
+            }
+            const lastQ = qi === qs.length - 1;
+            $("#qfb", el).innerHTML = feedbackBox(ok ? "good" : "bad", `<p><b>${ok ? `Correct! +${gained}` : o === -1 ? "Out of time — one fuel tank burned." : "Wrong turn — one fuel tank burned."}</b> ${esc(q.feedback)}</p>
+              <div style="margin-top:12px"><button class="btn btn-primary btn-sm" id="qn">${lastQ ? `${icon("flag")} See results` : `${icon("arrowRight")} Next checkpoint`}</button></div>`);
+            if (ok && streak >= 3) toast(`${streak} in a row! Streak multiplier ×${Math.min(3, 1 + streak * .5).toFixed(1)}`, "flame");
+            $("#qn", el).onclick = () => { if (lastQ) finish(); else { qi++; draw(); } };
+          };
+          $$(".opt", el).forEach(b => b.onclick = () => answer(+b.dataset.o));
+        };
+        const finish = async () => {
+          let pct = Math.round(correct / qs.length * 100);
+          const server = await Api.grade(answers);
+          if (server && typeof server.percent === "number") pct = server.percent;
+          const pass = pct >= C.passMark * 100;
+          const fuelBonus = pass ? fuel * 25 : 0;
+          const stars = pct === 100 ? 3 : pct >= 80 ? 2 : pct >= 50 ? 1 : 0;
+          if (S.bestScore == null || pct > S.bestScore) S.bestScore = pct;
+          if (pass) {
+            const prev = S.awarded[`${mod.id}-quiz`] || 0, total = score + fuelBonus;
+            if (total > prev) { S.points += total - prev; S.awarded[`${mod.id}-quiz`] = total; floatPts(`+${total - prev}`); }
+            renderHud(true); confetti(140); unlockNext();
+          }
+          save();
+          el.innerHTML = `${head(sc, "Challenge results")}
+            <div class="result ${pass ? "" : "fail"}"><div class="stars">${[0, 1, 2].map(k => icon("star", k < stars ? "on" : "")).join("")}</div>
+            <div class="big">${pct}%</div><h2>${pass ? "Summit reached — you passed!" : "Not quite at the summit"}</h2>
+            <p class="muted">${pass ? "Continue to complete the checkpoint and collect your badge." : `You need ${Math.round(C.passMark * 100)}% to pass. Review the feedback and try again — every attempt sharpens your route sense.`}</p>
+            <div class="stat-row"><div class="stat"><b>${correct}/${qs.length}</b>correct</div><div class="stat"><b>${score}</b>challenge points</div><div class="stat"><b>×${best}</b>best streak</div><div class="stat"><b>${fuel}/${sc.fuel}</b>fuel left${pass ? ` (+${fuelBonus})` : ""}</div></div>
+            ${server ? `<p class="muted" style="font-size:.8rem">${icon("shield")} Score verified by the course server.</p>` : ""}
+            ${pass ? "" : `<button class="btn btn-gold" id="retry">${icon("refresh")} Retry the challenge</button>`}</div>`;
+          const r = $("#retry", el); r && (r.onclick = run);
+        };
+        draw();
+      }
+    },
+
+    takeaway(el, sc) {
+      el.innerHTML = `${head(sc)}<p class="s-body">Compliance is part of everyday work. Keep this four-step route with you.</p>
+        <div class="pcda">${sc.steps.map((s, i) => `<div class="pc" style="animation-delay:${i * .15}s"><span class="step">STEP ${i + 1}</span><div class="pi">${icon(s.icon)}</div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("")}</div>
+        <div class="bullets">${[["shield", "You don’t need proof to ask a question or raise a concern."], ["book", "Your organization’s policies and procedures guide the next steps."], ["megaphone", "Use PRCI’s approved channels for guidance and reporting."]].map(([ic, t], i) => `<div class="b" style="animation-delay:${.6 + i * .1}s">${icon(ic)}<span>${t}</span></div>`).join("")}</div>`;
+    },
+
+    reflect(el, sc) {
+      el.innerHTML = `${head(sc)}<p class="s-body">${esc(sc.lead)}</p><textarea id="refl" placeholder="e.g. A rushed approval request — I’d pause, check the procedure, and contact my manager first.">${esc(S.reflection || "")}</textarea>
+        <p class="muted" style="font-size:.85rem;margin-top:8px">${icon("star")} Write at least 20 characters for +${sc.points} route points.</p>`;
+      const ta = $("#refl", el);
+      ta.oninput = () => { S.reflection = ta.value; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} if (ta.value.trim().length >= 20) award(`${mod.id}-${idx}`, sc.points, ta); };
+    },
+
+    certificate(el) {
+      if (!isDone(8)) {
+        S.done.includes(8) || S.done.push(8);
+        if (!S.badges.includes(mod.badge.id)) S.badges.push(mod.badge.id);
+        S.completedAt = S.completedAt || new Date().toISOString();
+        award("mod-8", 50); save(); confetti(280);
+      }
+      const date = new Date(S.completedAt).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+      el.innerHTML = `<div class="cert">
+        <div class="seal">${icon("award")}</div>
+        <p class="eyebrow" style="justify-content:center">Certificate of completion</p>
+        <h2>Compliance Route 101</h2><p class="muted">This certifies that</p>
+        <div class="name">${esc(S.name)}</div>
+        <p>has completed all eight checkpoints of <b>Compliance Route 101: Making responsible decisions at work</b>.</p>
+        <div class="badges">${C.modules.map(m => `<span title="${esc(m.badge.name)}">${icon(m.badge.icon)}</span>`).join("")}</div>
+        <div class="stat-row"><div class="stat"><b>${S.bestScore ?? "—"}%</b>final assessment</div><div class="stat"><b>${S.points}</b>route points</div><div class="stat"><b>${esc(levelFor(S.points))}</b>navigator level</div><div class="stat"><b>${date}</b>completed</div></div>
+        <div class="cert-actions" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px">
+          ${window.self === window.top ? `<button class="btn btn-primary" id="printCert">${icon("printer")} Print / save as PDF</button>` : ""}
+          <button class="btn btn-ghost" id="certBoard">${icon("trophy")} Leaderboard</button>
+          <button class="btn btn-ghost" id="certRestart">${icon("refresh")} Restart course</button></div></div>`;
+      const pc = $("#printCert", el); pc && (pc.onclick = () => print());
+      $("#certBoard", el).onclick = showBoard;
+      $("#certRestart", el).onclick = confirmRestart;
+    }
+  };
+
+  /* ───────────────────────── passport + leaderboard ───────────────────────── */
+  function showPassport() {
+    modal(`<h2>${icon("award")} Route Passport</h2><p class="muted">${esc(S.name || "Navigator")} · ${S.points} points · ${esc(levelFor(S.points))}</p>
+      <div class="passport">${C.modules.map(m => { const got = S.badges.includes(m.badge.id); return `<div class="stamp ${got ? "got" : ""}"><div class="si">${icon(got ? m.badge.icon : "lock")}</div><b>${esc(m.badge.name)}</b><br>Checkpoint ${m.id}</div>`; }).join("")}</div>
+      <div class="modal-actions"><button class="btn btn-ghost" id="resetBtn">${icon("refresh")} Restart course</button><button class="btn btn-primary" data-close>Close</button></div>`);
+    $("#resetBtn").onclick = confirmRestart;
+  }
+
+  /* ───────────────────────── restart ───────────────────────── */
+  function confirmRestart() {
+    modal(`<h2>${icon("refresh")} Restart the course?</h2>
+      <p>This takes you back to the start and clears your name, progress, route points, badges and final assessment score on this device.</p>
+      <p class="muted">You’ll type a name again before Checkpoint 1, so someone else can also take the course from the beginning.</p>
+      <div class="modal-actions"><button class="btn btn-ghost" data-close>Keep my progress</button><button class="btn btn-primary" id="restartGo">${icon("refresh")} Restart course</button></div>`);
+    $("#restartGo").onclick = restartCourse;
+  }
+  function restartCourse() {
+    S = blank(); save();
+    const nameIn = $("#nameInline"); if (nameIn) nameIn.value = "";
+    $("#nameErr").classList.add("hidden");
+    closeModal(); Narr.stop(); cleanup && cleanup(); cleanup = null; mod = null; idx = 0;
+    $("#playerView").classList.add("hidden"); $("#mapView").classList.remove("hidden");
+    renderMap(); scrollTo({ top: 0, behavior: "smooth" });
+    toast("Course restarted. Type a name to begin the route again.", "refresh");
+    setTimeout(askName, 400);
+  }
+
+  async function showBoard() {
+    modal(`<h2>${icon("trophy")} Leaderboard</h2><p class="muted">Loading…</p>`);
+    const data = await Api.leaderboard();
+    let rows = data && Array.isArray(data.leaders) ? data.leaders : null;
+    const note = rows ? "Live standings from the course server." : "Offline mode — showing your result only. Run the Java CourseServer for a shared leaderboard.";
+    if (!rows) rows = [{ learnerId: S.learnerId, name: S.name || "You", points: S.points, modules: S.done.length }];
+    modal(`<h2>${icon("trophy")} Leaderboard</h2><p class="muted" style="font-size:.85rem">${note}</p>
+      <table class="board"><thead><tr><th>#</th><th>Navigator</th><th>Checkpoints</th><th>Points</th></tr></thead><tbody>
+      ${rows.map((r, i) => `<tr class="${r.learnerId === S.learnerId ? "me" : ""}"><td>${i < 3 ? icon("trophy") : i + 1}</td><td>${esc(r.name)}</td><td>${r.modules}/8</td><td>${r.points}</td></tr>`).join("")}</tbody></table>
+      <div class="modal-actions"><button class="btn btn-primary" data-close>Close</button></div>`);
+  }
+
+  /* ───────────────────────── theme ───────────────────────── */
+  function initTheme() {
+    let t = null; try { t = localStorage.getItem(KEY + ".theme"); } catch {}
+    if (t) document.documentElement.dataset.theme = t;
+    const sync = () => { const dark = document.documentElement.dataset.theme === "dark" || (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches); $("#themeBtn").innerHTML = icon(dark ? "sun" : "moon"); return dark; };
+    sync();
+    $("#themeBtn").onclick = () => { const dark = sync(); const nt = dark ? "light" : "dark"; document.documentElement.dataset.theme = nt; try { localStorage.setItem(KEY + ".theme", nt); } catch {} sync(); };
+  }
+
+  /* ───────────────────────── boot ───────────────────────── */
+  $("#nextBtn").onclick = next;
+  $("#prevBtn").onclick = () => { if (idx > 0) { Narr.stop(); idx--; renderScreen(); } };
+  $("#backToMap").onclick = () => backToMap();
+  $("#narrBtn").onclick = () => Narr.toggle();
+  $("#passportBtn").onclick = showPassport;
+  $("#boardBtn").onclick = showBoard;
+  $("#restartBtn").onclick = confirmRestart;
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#modal").classList.contains("hidden")) closeModal(); });
+  initTheme();
+  initNameForm();
+  layoutNodes();
+  renderMap();
+  Api.ping().then(() => Api.sync());
+})();
+
+</script>
+
+</body>
+</html>
